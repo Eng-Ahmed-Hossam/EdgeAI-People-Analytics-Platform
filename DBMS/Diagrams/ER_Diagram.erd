@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="ER_Diagram.erd">
+	<entities>
+		<data-source id="postgres-jdbc-19a10bf30f7-27ddcb61c059ecef">
+			<entity id="1" name="business_profile" fq-name="public.business_profile" order="0" x="350" y="59">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="2" name="daily_fpga_metrics" fq-name="public.daily_fpga_metrics" order="1" x="356" y="426">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="3" name="daily_revenue" fq-name="public.daily_revenue" order="2" x="40" y="324">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="4" name="events" fq-name="public.events" order="3" x="341" y="723">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="5" name="location_metadata" fq-name="public.location_metadata" order="4" x="663" y="118">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="6" name="prediction_output" fq-name="public.prediction_output" order="5" x="40" y="40">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="7" name="promotions" fq-name="public.promotions" order="6" x="40" y="528">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="8" name="realtime_metrics" fq-name="public.realtime_metrics" order="7" x="589" y="559">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+			<entity id="9" name="weather" fq-name="public.weather" order="8" x="799" y="560">
+				<path name="public"/>
+				<path name="edge_ai_location_intelligence"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="daily_revenue_business_id_fkey" fq-name="public.daily_revenue.daily_revenue_business_id_fkey" type="fk" pk-ref="1" fk-ref="3"/>
+		<relation name="prediction_output_business_id_fkey" fq-name="public.prediction_output.prediction_output_business_id_fkey" type="fk" pk-ref="1" fk-ref="6"/>
+		<relation name="promotions_business_id_fkey" fq-name="public.promotions.promotions_business_id_fkey" type="fk" pk-ref="1" fk-ref="7"/>
+		<relation name="business_profile_location_id_fkey" fq-name="public.business_profile.business_profile_location_id_fkey" type="fk" pk-ref="5" fk-ref="1"/>
+		<relation name="daily_fpga_metrics_location_id_fkey" fq-name="public.daily_fpga_metrics.daily_fpga_metrics_location_id_fkey" type="fk" pk-ref="5" fk-ref="2"/>
+		<relation name="prediction_output_location_id_fkey" fq-name="public.prediction_output.prediction_output_location_id_fkey" type="fk" pk-ref="5" fk-ref="6"/>
+		<relation name="realtime_metrics_location_id_fkey" fq-name="public.realtime_metrics.realtime_metrics_location_id_fkey" type="fk" pk-ref="5" fk-ref="8"/>
+		<relation name="weather_location_id_fkey" fq-name="public.weather.weather_location_id_fkey" type="fk" pk-ref="5" fk-ref="9"/>
+	</relations>
+</diagram>
