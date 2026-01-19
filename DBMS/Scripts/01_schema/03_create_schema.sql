@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS Location_Metadata (
     population INTEGER,
     avg_income NUMERIC(12,2),
     competitor_count INTEGER,
+	competitor_density NUMERIC(10,4), -- competitor_density = competitor_count / (PI * (catchment_radius_m / 1000)^2)
     catchment_radius_m INTEGER,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
@@ -85,6 +86,39 @@ CREATE TABLE IF NOT EXISTS Daily_FPGA_Metrics (
 );
 
 -- ==========================================
+-- TABLE: Hourly_FPGA_Metrics
+-- Aggregated hourly metrics derived from RealTime_Metrics
+-- This directly supports:
+	-- Peak-hour intensity
+	-- Demand volatility
+	-- Better feasibility scoring
+-- ==========================================
+CREATE TABLE Hourly_FPGA_Metrics (
+    location_id INT REFERENCES location_metadata(location_id),
+    date DATE,
+    hour INT,
+    hourly_footfall INT,
+    hourly_avg_dwell NUMERIC,
+    peak_hour_flag BOOLEAN
+);
+
+-- ==========================================
+-- TABLE: behavior_trends
+-- Stores engineered temporal behavior features derived from historical FPGA metrics,
+-- including footfall trends, growth rates, and activity volatility indicators.
+-- Used for time-series analysis and feasibility prediction models.
+-- ==========================================
+CREATE TABLE IF NOT EXISTS behavior_trends (
+  location_id INT REFERENCES location_metadata(location_id),
+  date DATE,
+  footfall_7d_avg NUMERIC(10,2),
+  footfall_growth_rate NUMERIC(6,3),
+  dwell_trend_slope NUMERIC(6,3),
+  traffic_volatility_index NUMERIC(6,3),
+  trend_window_days INT
+);
+
+-- ==========================================
 -- TABLE: Daily_Revenue
 -- Stores business-level daily revenue (used for ML labels)
 -- ==========================================
@@ -94,23 +128,23 @@ CREATE TABLE IF NOT EXISTS Daily_Revenue (
     total_revenue NUMERIC(14,2),
     total_transactions INTEGER,
     avg_transaction_value NUMERIC(12,2),
+	revenue_per_visitor NUMERIC,
+	transactions_per_hour NUMERIC,
     PRIMARY KEY (business_id, date)
 );
 
 -- ==========================================
--- TABLE: Prediction_Output
--- Stores ML model predictions for revenue or profit
+-- TABLE: operational_efficiency
+-- Stores derived business efficiency metrics calculated from operational costs
+-- and revenue data, providing normalized indicators of profitability and cost structure.
+-- Used to compare performance across different business sizes and locations.
 -- ==========================================
-CREATE TABLE IF NOT EXISTS Prediction_Output (
-    prediction_id BIGSERIAL PRIMARY KEY,
-    business_id INTEGER NOT NULL REFERENCES Business_Profile(business_id) ON DELETE CASCADE,
-    location_id INTEGER NOT NULL REFERENCES Location_Metadata(location_id) ON DELETE CASCADE,
-    prediction_date DATE,
-    predicted_revenue NUMERIC(14,2),
-    predicted_profit NUMERIC(14,2),
-    confidence_score REAL,
-    model_version TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+CREATE TABLE IF NOT EXISTS operational_efficiency (
+  business_id INT REFERENCES business_profile(business_id),
+  date DATE,
+  staff_cost_ratio NUMERIC(6,3),
+  rent_cost_ratio NUMERIC(6,3),
+  profit_margin_est NUMERIC(6,3)
 );
 
 -- ==========================================
@@ -130,6 +164,23 @@ CREATE TABLE IF NOT EXISTS Weather (
 CREATE INDEX IF NOT EXISTS idx_weather_loc_ts ON Weather(location_id, timestamp);
 
 -- ==========================================
+-- TABLE: Events
+-- External public events affecting traffic and revenue
+-- ==========================================
+CREATE TABLE IF NOT EXISTS Events (
+    event_id SERIAL PRIMARY KEY,
+    name TEXT,
+	event_type TEXT,
+    location_lat DOUBLE PRECISION,
+    location_lon DOUBLE PRECISION,
+    start_date DATE,
+    end_date DATE,
+    expected_attendance INTEGER,
+	event_influence_radius_m INT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+-- ==========================================
 -- TABLE: Promotions
 -- Business promotions and their effects
 -- ==========================================
@@ -144,18 +195,65 @@ CREATE TABLE IF NOT EXISTS Promotions (
 );
 
 -- ==========================================
--- TABLE: Events
--- External public events affecting traffic and revenue
+-- TABLE: feature_store
+-- Centralized repository for precomputed feature vectors used by machine learning models.
+-- Ensures feature consistency, reproducibility, and separation between raw data
+-- and model-ready inputs.
 -- ==========================================
-CREATE TABLE IF NOT EXISTS Events (
-    event_id SERIAL PRIMARY KEY,
-    name TEXT,
-    location_lat DOUBLE PRECISION,
-    location_lon DOUBLE PRECISION,
-    start_date DATE,
-    end_date DATE,
-    expected_attendance INTEGER,
+CREATE TABLE IF NOT EXISTS feature_store (
+  feature_id BIGSERIAL PRIMARY KEY,
+  business_id INT,
+  location_id INT,
+  date DATE,
+  feature_vector_hash TEXT,
+  generated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ==========================================
+-- TABLE: model_metadata
+-- Stores metadata and evaluation results for trained machine learning models,
+-- including training periods, feature versions, and performance metrics.
+-- Enables model traceability, version control, and auditability.
+-- ==========================================
+CREATE TABLE IF NOT EXISTS model_metadata (
+  model_version TEXT PRIMARY KEY,
+  model_type TEXT,
+  training_start_date DATE,
+  training_end_date DATE,
+  feature_set_version TEXT,
+  evaluation_mae NUMERIC(8,4),
+  evaluation_r2 NUMERIC(6,4)
+);
+
+-- ==========================================
+-- TABLE: Prediction_Output
+-- Stores ML model predictions for revenue or profit
+-- ==========================================
+CREATE TABLE IF NOT EXISTS Prediction_Output (
+    prediction_id BIGSERIAL PRIMARY KEY,
+    business_id INTEGER NOT NULL REFERENCES Business_Profile(business_id) ON DELETE CASCADE,
+    location_id INTEGER NOT NULL REFERENCES Location_Metadata(location_id) ON DELETE CASCADE,
+    prediction_date DATE,
+    predicted_revenue NUMERIC(14,2),
+    predicted_profit NUMERIC(14,2),
+	feasibility_score NUMERIC(4,2),
+    confidence_score REAL,
+    model_version TEXT REFERENCES model_metadata(model_version),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+-- ==========================================
+-- TABLE: data_quality_log
+-- Records data completeness and anomaly detection results across source tables.
+-- Used to monitor data reliability and prevent low-quality inputs
+-- from affecting analytics and model predictions.
+-- ==========================================
+CREATE TABLE IF NOT EXISTS data_quality_log (
+  log_id BIGSERIAL PRIMARY KEY,
+  source_table TEXT,
+  record_date DATE,
+  completeness_pct NUMERIC(5,2),
+  anomaly_flag BOOLEAN
 );
 
 -- ==========================================

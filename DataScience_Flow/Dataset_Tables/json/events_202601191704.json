@@ -1,0 +1,123 @@
+{
+"events": [
+	{
+		"event_id" : 1,
+		"name" : "Cairo International Book Fair",
+		"event_type" : "cultural",
+		"location_lat" : 30.0116,
+		"location_lon" : 31.2089,
+		"start_date" : "2024-09-15",
+		"end_date" : "2024-09-28",
+		"expected_attendance" : 1200000,
+		"event_influence_radius_m" : 5000,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 2,
+		"name" : "Zamalek Derby Screening",
+		"event_type" : "sports",
+		"location_lat" : 30.0611,
+		"location_lon" : 31.2197,
+		"start_date" : "2024-09-22",
+		"end_date" : "2024-09-22",
+		"expected_attendance" : 35000,
+		"event_influence_radius_m" : 3000,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 3,
+		"name" : "Downtown Street Food Festival",
+		"event_type" : "food",
+		"location_lat" : 30.0444,
+		"location_lon" : 31.2357,
+		"start_date" : "2024-09-20",
+		"end_date" : "2024-09-23",
+		"expected_attendance" : 180000,
+		"event_influence_radius_m" : 2500,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 4,
+		"name" : "Nasr City Mall Clearance Sale",
+		"event_type" : "commercial",
+		"location_lat" : 30.0561,
+		"location_lon" : 31.33,
+		"start_date" : "2024-09-18",
+		"end_date" : "2024-09-25",
+		"expected_attendance" : 220000,
+		"event_influence_radius_m" : 4000,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 5,
+		"name" : "Open-Air Concert at Al Azhar Park",
+		"event_type" : "music",
+		"location_lat" : 30.0408,
+		"location_lon" : 31.2623,
+		"start_date" : "2024-09-21",
+		"end_date" : "2024-09-21",
+		"expected_attendance" : 15000,
+		"event_influence_radius_m" : 2000,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 6,
+		"name" : "Tech Startup Meetup Cairo",
+		"event_type" : "business",
+		"location_lat" : 30.0735,
+		"location_lon" : 31.3451,
+		"start_date" : "2024-09-24",
+		"end_date" : "2024-09-24",
+		"expected_attendance" : 1200,
+		"event_influence_radius_m" : 1500,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 7,
+		"name" : "Friday Prayer Overflow",
+		"event_type" : "religious",
+		"location_lat" : 30.0449,
+		"location_lon" : 31.2499,
+		"start_date" : "2024-09-20",
+		"end_date" : "2024-09-20",
+		"expected_attendance" : 80000,
+		"event_influence_radius_m" : 1800,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 8,
+		"name" : "University Orientation Week",
+		"event_type" : "education",
+		"location_lat" : 30.0645,
+		"location_lon" : 31.2786,
+		"start_date" : "2024-09-17",
+		"end_date" : "2024-09-24",
+		"expected_attendance" : 60000,
+		"event_influence_radius_m" : 3500,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 9,
+		"name" : "Night Market – Maadi",
+		"event_type" : "commercial",
+		"location_lat" : 29.9602,
+		"location_lon" : 31.2569,
+		"start_date" : "2024-09-22",
+		"end_date" : "2024-09-23",
+		"expected_attendance" : 22000,
+		"event_influence_radius_m" : 2000,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	},
+	{
+		"event_id" : 10,
+		"name" : "Charity Marathon – New Cairo",
+		"event_type" : "sports",
+		"location_lat" : 30.0276,
+		"location_lon" : 31.4966,
+		"start_date" : "2024-09-29",
+		"end_date" : "2024-09-29",
+		"expected_attendance" : 9000,
+		"event_influence_radius_m" : 4500,
+		"created_at" : "2026-01-19T14:04:02.288Z"
+	}
+]}

@@ -32,6 +32,10 @@ ON RealTime_Metrics(location_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_metrics_quality 
 ON RealTime_Metrics(data_quality_flag);
 
+-- Hourly FPGA analysis
+CREATE INDEX IF NOT EXISTS idx_hourly_fpga_loc_date
+ON Hourly_FPGA_Metrics (location_id, date);
+
 -- 💵 Daily Revenue: lookup by business and date
 CREATE INDEX IF NOT EXISTS idx_revenue_business_date 
 ON Daily_Revenue(business_id, date);
@@ -42,6 +46,9 @@ ON Prediction_Output(business_id, prediction_date);
 
 CREATE INDEX IF NOT EXISTS idx_prediction_location 
 ON Prediction_Output(location_id);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_output_model
+ON Prediction_Output (model_version);
 
 -- 🎯 Promotions: connect to business
 CREATE INDEX IF NOT EXISTS idx_promotions_business 
@@ -60,6 +67,25 @@ ON Events(start_date, end_date);
 
 CREATE INDEX IF NOT EXISTS idx_event_location 
 ON Events(location_lat, location_lon);
+
+-- Behavior trends
+CREATE INDEX IF NOT EXISTS idx_behavior_trends_loc_date
+ON behavior_trends (location_id, date);
+
+-- Revenue joins
+CREATE INDEX IF NOT EXISTS idx_daily_revenue_business_date
+ON Daily_Revenue (business_id, date);
+
+-- Operational efficiency
+CREATE INDEX IF NOT EXISTS idx_operational_efficiency_business_date
+ON operational_efficiency (business_id, date);
+
+-- Feature store lookups
+CREATE INDEX IF NOT EXISTS idx_feature_store_hash
+ON feature_store (feature_vector_hash);
+
+CREATE INDEX IF NOT EXISTS idx_feature_store_business_date
+ON feature_store (business_id, date);
 
 -- Optional optimization ideas
 CREATE INDEX IF NOT EXISTS idx_metrics_congestion 

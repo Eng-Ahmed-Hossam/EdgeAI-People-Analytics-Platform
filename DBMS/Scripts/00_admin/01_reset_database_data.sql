@@ -11,15 +11,20 @@ SET session_replication_role = 'replica';
 -- ==========================================
 -- 1️⃣ Delete from child tables first (to avoid FK violations)
 -- ==========================================
-TRUNCATE TABLE 
+TRUNCATE TABLE
     Prediction_Output,
-    Promotions,
-    Daily_Revenue,
+    feature_store,
+    behavior_trends,
+    operational_efficiency,
+    Hourly_FPGA_Metrics,
     Daily_FPGA_Metrics,
+    data_quality_log,
+    Daily_Revenue,
+    Promotions,
+    Events,
+    Weather,
     RealTime_Metrics,
     Business_Profile,
-    Weather,
-    Events,
     Location_Metadata
 RESTART IDENTITY CASCADE;
 

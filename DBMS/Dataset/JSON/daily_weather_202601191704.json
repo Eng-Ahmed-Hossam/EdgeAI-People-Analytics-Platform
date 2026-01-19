@@ -1,0 +1,123 @@
+{
+"daily_weather": [
+	{
+		"location_id" : 4,
+		"date" : "2024-09-22",
+		"avg_temp_c" : 34.19565217391305,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 4,
+		"date" : "2024-09-24",
+		"avg_temp_c" : 33.68749976158142,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 4,
+		"date" : "2024-09-23",
+		"avg_temp_c" : 33.93333347638448,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 3,
+		"date" : "2024-09-22",
+		"avg_temp_c" : 31.90000003317128,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 1,
+		"date" : "2024-09-23",
+		"avg_temp_c" : 32.329166650772095,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 1,
+		"date" : "2024-09-22",
+		"avg_temp_c" : 32.726086740908414,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 2,
+		"date" : "2024-09-23",
+		"avg_temp_c" : 33.12916628519694,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 3,
+		"date" : "2024-09-25",
+		"avg_temp_c" : 27.399999618530273,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 4,
+		"date" : "2024-09-25",
+		"avg_temp_c" : 30.100000381469727,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 3,
+		"date" : "2024-09-23",
+		"avg_temp_c" : 31.56250007947286,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 1,
+		"date" : "2024-09-24",
+		"avg_temp_c" : 32.07083328564962,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 1,
+		"date" : "2024-09-25",
+		"avg_temp_c" : 27.899999618530273,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 5,
+		"date" : "2024-09-22",
+		"avg_temp_c" : 33.60869573510212,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 5,
+		"date" : "2024-09-23",
+		"avg_temp_c" : 33.14583317438761,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 2,
+		"date" : "2024-09-25",
+		"avg_temp_c" : 28.799999237060547,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 2,
+		"date" : "2024-09-22",
+		"avg_temp_c" : 33.32608703944994,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 2,
+		"date" : "2024-09-24",
+		"avg_temp_c" : 32.887500047683716,
+		"is_extreme_heat" : 1
+	},
+	{
+		"location_id" : 3,
+		"date" : "2024-09-24",
+		"avg_temp_c" : 31.304166793823242,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 5,
+		"date" : "2024-09-25",
+		"avg_temp_c" : 29.899999618530273,
+		"is_extreme_heat" : 0
+	},
+	{
+		"location_id" : 5,
+		"date" : "2024-09-24",
+		"avg_temp_c" : 32.95416649182638,
+		"is_extreme_heat" : 1
+	}
+]}

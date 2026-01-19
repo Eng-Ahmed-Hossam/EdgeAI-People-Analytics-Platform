@@ -1,0 +1,873 @@
+{
+"active_promos": [
+	{
+		"business_id" : 202,
+		"date" : "2024-09-21",
+		"promo_lift_pct" : 15.0
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 208,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-20",
+		"promo_lift_pct" : 8.5
+	},
+	{
+		"business_id" : 214,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 12.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-14",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 206,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 6.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-07",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-09",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-24",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-11",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 206,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 6.5
+	},
+	{
+		"business_id" : 204,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 12.0
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 6.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 16.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-25",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 210,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 11.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 219,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 30.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-13",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-17",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-08",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-20",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 15.0
+	},
+	{
+		"business_id" : 204,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 13.0
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-16",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-18",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-09",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-09",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-23",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-21",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-18",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-11",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-08",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 6.0
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-07",
+		"promo_lift_pct" : 6.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-21",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-19",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-07",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-15",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-21",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-10",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 210,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 11.0
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-21",
+		"promo_lift_pct" : 8.5
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-20",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-08",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-12",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-21",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 220,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 18.0
+	},
+	{
+		"business_id" : 214,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 12.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-15",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 6.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-10",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-07",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 6.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-10",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-12",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 212,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 14.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 215,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 10.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-22",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-08",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-07",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-04",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-20",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-09",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 210,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 11.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-03",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 15.0
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 216,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 5.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 4.5
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-24",
+		"promo_lift_pct" : 2.0
+	},
+	{
+		"business_id" : 214,
+		"date" : "2024-09-29",
+		"promo_lift_pct" : 12.0
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 207,
+		"date" : "2024-09-27",
+		"promo_lift_pct" : 5.0
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-05",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-19",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 214,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 12.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-23",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-09-20",
+		"promo_lift_pct" : 22.0
+	},
+	{
+		"business_id" : 205,
+		"date" : "2024-09-19",
+		"promo_lift_pct" : 9.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-26",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-13",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 209,
+		"date" : "2024-09-28",
+		"promo_lift_pct" : 7.5
+	},
+	{
+		"business_id" : 201,
+		"date" : "2024-09-22",
+		"promo_lift_pct" : 8.5
+	},
+	{
+		"business_id" : 202,
+		"date" : "2024-10-02",
+		"promo_lift_pct" : 11.5
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-14",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 203,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 16.0
+	},
+	{
+		"business_id" : 211,
+		"date" : "2024-09-30",
+		"promo_lift_pct" : 24.0
+	},
+	{
+		"business_id" : 218,
+		"date" : "2024-10-06",
+		"promo_lift_pct" : 1.5
+	},
+	{
+		"business_id" : 213,
+		"date" : "2024-10-01",
+		"promo_lift_pct" : 8.0
+	},
+	{
+		"business_id" : 217,
+		"date" : "2024-09-25",
+		"promo_lift_pct" : 2.0
+	}
+]}

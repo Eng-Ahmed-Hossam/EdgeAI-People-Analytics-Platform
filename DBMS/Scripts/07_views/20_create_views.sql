@@ -12,12 +12,14 @@
 CREATE OR REPLACE VIEW hourly_metrics AS
 SELECT
     location_id,
-    date_trunc('hour', timestamp) AS hour,
-    SUM(people_count) AS total_people,
-    ROUND(AVG(dwell_time_avg), 2) AS avg_dwell,
-    SUM(vehicle_count) AS total_vehicles,
-    SUM(CASE WHEN data_quality_flag <> 0 THEN 1 ELSE 0 END) AS bad_intervals
-FROM RealTime_Metrics
+    date + hour * INTERVAL '1 hour' AS hour,
+    hourly_footfall AS total_people,
+    hourly_avg_dwell AS avg_dwell,
+    NULL::INTEGER AS total_vehicles,
+    NULL::INTEGER AS bad_intervals
+    -- SUM(vehicle_count) AS total_vehicles,
+    -- SUM(CASE WHEN data_quality_flag <> 0 THEN 1 ELSE 0 END) AS bad_intervals
+FROM Hourly_FPGA_Metrics
 GROUP BY location_id, date_trunc('hour', timestamp)
 ORDER BY location_id, hour;
 
