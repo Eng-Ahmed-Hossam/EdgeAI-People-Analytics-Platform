@@ -1,0 +1,260 @@
+# do run_sim.do 
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Modifying modelsim.ini
+# +incdir+../include
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module camera_if
+# 
+# Top level modules:
+# 	camera_if
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module sccb_ctrl
+# 
+# Top level modules:
+# 	sccb_ctrl
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module xclk_gen
+# 
+# Top level modules:
+# 	xclk_gen
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module pixel_fifo
+# 
+# Top level modules:
+# 	pixel_fifo
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module frame_writer
+# 
+# Top level modules:
+# 	frame_writer
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module frame_buffer_mgr
+# 
+# Top level modules:
+# 	frame_buffer_mgr
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module sdram_ctrl
+# 
+# Top level modules:
+# 	sdram_ctrl
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module mac_accumulator
+# 
+# Top level modules:
+# 	mac_accumulator
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module pe
+# 
+# Top level modules:
+# 	pe
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module pe_array
+# 
+# Top level modules:
+# 	pe_array
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module window_gen
+# 
+# Top level modules:
+# 	window_gen
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module bias_add
+# 
+# Top level modules:
+# 	bias_add
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module requantizer
+# 
+# Top level modules:
+# 	requantizer
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module activation_unit
+# 
+# Top level modules:
+# 	activation_unit
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module pooling_unit
+# 
+# Top level modules:
+# 	pooling_unit
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module ifmap_buffer
+# 
+# Top level modules:
+# 	ifmap_buffer
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module ofmap_buffer
+# 
+# Top level modules:
+# 	ofmap_buffer
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module weight_buffer
+# 
+# Top level modules:
+# 	weight_buffer
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module cnn_core
+# 
+# Top level modules:
+# 	cnn_core
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module cnn_input_adapter
+# 
+# Top level modules:
+# 	cnn_input_adapter
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module layer_scheduler
+# 
+# Top level modules:
+# 	layer_scheduler
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module tensor_output_buffer
+# 
+# Top level modules:
+# 	tensor_output_buffer
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module pl_edgeai_top
+# 
+# Top level modules:
+# 	pl_edgeai_top
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module pl_edgeai_top_tb
+# 
+# Top level modules:
+# 	pl_edgeai_top_tb
+# vsim -voptargs=\"+acc\" work.pl_edgeai_top_tb 
+# Loading sv_std.std
+# Loading work.pl_edgeai_top_tb
+# Loading work.pl_edgeai_top
+# Loading work.xclk_gen
+# Loading work.camera_if
+# Loading work.pixel_fifo
+# Loading work.frame_writer
+# Loading work.frame_buffer_mgr
+# Loading work.sdram_ctrl
+# Loading work.cnn_input_adapter
+# Loading work.layer_scheduler
+# Loading work.cnn_core
+# Loading work.ifmap_buffer
+# Loading work.weight_buffer
+# Loading work.window_gen
+# Loading work.pe_array
+# Loading work.bias_add
+# Loading work.requantizer
+# Loading work.activation_unit
+# Loading work.pooling_unit
+# Loading work.ofmap_buffer
+# Loading work.tensor_output_buffer
+# Loading work.pe
+# ** Warning: (vsim-3015) ../top/rtl/pl_edgeai_top.v(452): [PCDPC] - Port size (12 or 12) does not match connection size (16) for port 'rd_addr'. The port definition is at: ../top/rtl/tensor_output_buffer.v(59).
+# 
+#         Region: /pl_edgeai_top_tb/dut/u_tensor_buf
+# Golden tensor loaded: 4080 elements
+# ==========================================================
+#   EdgeAI PL Integration Testbench v4.0
+#   CNN Accelerator with Real Darknet Weights
+# ==========================================================
+# Simulation started at time 0
+# 
+# [PHASE 1] Reset Sequence
+#   System reset released at time 295000
+#   SDRAM controller initialized
+# 
+# [PHASE 2] Camera Frame Capture
+# --------------------------------------------------
+#   Camera Frame Simulation Started
+#   WARN: Frame write may still be in progress
+# 
+# [PHASE 3] CNN Inference (Direct Scheduler Drive)
+# --------------------------------------------------
+#   Pre-loading Layer 0 weights...
+# [TB] Loading weights for layer 0 from rtl_hex/layer0_weights_flat.hex
+# [TB] Loading biases  for layer 0 from rtl_hex/layer0_bias.hex
+#   Forcing scheduler start signal...
+#   Layer 0:  in_ch=0    out_ch=0    dim=0   CONV  rqM=0     rqS=0 
+# [TB] Loading weights for layer 0 from rtl_hex/layer0_weights_flat.hex
+# [TB] Loading biases  for layer 0 from rtl_hex/layer0_bias.hex
+#   CNN Inference Started at time 1420195000
+#   Layer 1:  in_ch=3    out_ch=16   dim=128 CONV  rqM=40370 rqS=23
+#   Layer 2:  in_ch=16   out_ch=16   dim=128 POOL  rqM=0     rqS=0 
+# [TB] Loading weights for layer 2 from rtl_hex/layer2_weights_flat.hex
+# [TB] Loading biases  for layer 2 from rtl_hex/layer2_bias.hex
+#   Layer 3:  in_ch=16   out_ch=32   dim=64  CONV  rqM=50412 rqS=24
+#   Layer 4:  in_ch=32   out_ch=32   dim=64  POOL  rqM=0     rqS=0 
+# [TB] Loading weights for layer 4 from rtl_hex/layer4_weights_flat.hex
+# [TB] Loading biases  for layer 4 from rtl_hex/layer4_bias.hex
+#   Layer 5:  in_ch=32   out_ch=64   dim=32  CONV  rqM=36616 rqS=24
+#   Layer 6:  in_ch=64   out_ch=64   dim=32  POOL  rqM=0     rqS=0 
+# [TB] Loading weights for layer 6 from rtl_hex/layer6_weights_flat.hex
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 65537 of file "rtl_hex/layer6_weights_flat.hex". (Current address [65536], address range [0:65535])    : ../top/tb/pl_edgeai_top_tb.sv(152)
+#    Time: 1851745 ns  Iteration: 1  Instance: /pl_edgeai_top_tb
+# [TB] Loading biases  for layer 6 from rtl_hex/layer6_bias.hex
+#   Layer 7:  in_ch=64   out_ch=128  dim=16  CONV  rqM=51468 rqS=25
+#   Layer 8:  in_ch=128  out_ch=128  dim=16  POOL  rqM=0     rqS=0 
+# [TB] Loading weights for layer 8 from rtl_hex/layer8_weights_flat.hex
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 65537 of file "rtl_hex/layer8_weights_flat.hex". (Current address [65536], address range [0:65535])    : ../top/tb/pl_edgeai_top_tb.sv(152)
+#    Time: 1857355 ns  Iteration: 1  Instance: /pl_edgeai_top_tb
+# [TB] Loading biases  for layer 8 from rtl_hex/layer8_bias.hex
+#   Layer 9:  in_ch=128  out_ch=256  dim=8   CONV  rqM=39603 rqS=25
+#   Layer 10:  in_ch=256  out_ch=256  dim=8   POOL  rqM=0     rqS=0 
+# [TB] Loading weights for layer 10 from rtl_hex/layer10_weights_flat.hex
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 65537 of file "rtl_hex/layer10_weights_flat.hex". (Current address [65536], address range [0:65535])    : ../top/tb/pl_edgeai_top_tb.sv(152)
+#    Time: 1859125 ns  Iteration: 1  Instance: /pl_edgeai_top_tb
+# [TB] Loading biases  for layer 10 from rtl_hex/layer10_bias.hex
+#   Layer 11:  in_ch=256  out_ch=256  dim=4   CONV  rqM=54718 rqS=26
+#   Layer 12:  in_ch=256  out_ch=256  dim=4   POOL  rqM=0     rqS=0 
+# [TB] Loading weights for layer 12 from rtl_hex/layer12_weights_flat.hex
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 65537 of file "rtl_hex/layer12_weights_flat.hex". (Current address [65536], address range [0:65535])    : ../top/tb/pl_edgeai_top_tb.sv(152)
+#    Time: 1859935 ns  Iteration: 1  Instance: /pl_edgeai_top_tb
+# [TB] Loading biases  for layer 12 from rtl_hex/layer12_bias.hex
+#   Layer 13:  in_ch=256  out_ch=256  dim=4   CONV  rqM=56779 rqS=26
+# [TB] Loading weights for layer 13 from rtl_hex/layer13_weights_flat.hex
+# [TB] Loading biases  for layer 13 from rtl_hex/layer13_bias.hex
+#   Layer 14:  in_ch=256  out_ch=256  dim=4   CONV  rqM=51601 rqS=26
+# [TB] Loading weights for layer 14 from rtl_hex/layer14_weights_flat.hex
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 65537 of file "rtl_hex/layer14_weights_flat.hex". (Current address [65536], address range [0:65535])    : ../top/tb/pl_edgeai_top_tb.sv(152)
+#    Time: 1860755 ns  Iteration: 1  Instance: /pl_edgeai_top_tb
+# [TB] Loading biases  for layer 14 from rtl_hex/layer14_bias.hex
+#   Layer 15:  in_ch=256  out_ch=256  dim=4   CONV  rqM=62723 rqS=26
+# [TB] Loading weights for layer 15 from rtl_hex/layer15_weights_flat.hex
+# [TB] Loading biases  for layer 15 from rtl_hex/layer15_bias.hex
+#   Layer 16:  in_ch=256  out_ch=255  dim=4   CONV  rqM=41974 rqS=25
+# [TB] Loading weights for layer 16 from rtl_hex/layer16_weights_flat.hex
+# [TB] Loading biases  for layer 16 from rtl_hex/layer16_bias.hex
+#   Layer 17:  in_ch=255  out_ch=128  dim=4   CONV  rqM=41738 rqS=25
+# [TB] Loading weights for layer 17 from rtl_hex/layer17_weights_flat.hex
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 65537 of file "rtl_hex/layer17_weights_flat.hex". (Current address [65536], address range [0:65535])    : ../top/tb/pl_edgeai_top_tb.sv(152)
+#    Time: 1861985 ns  Iteration: 1  Instance: /pl_edgeai_top_tb
+# [TB] Loading biases  for layer 17 from rtl_hex/layer17_bias.hex
+#   Layer 18:  in_ch=128  out_ch=256  dim=4   CONV  rqM=22027 rqS=31
+# [TB] Loading weights for layer 18 from rtl_hex/layer18_weights_flat.hex
+# [TB] Loading biases  for layer 18 from rtl_hex/layer18_bias.hex
+# --------------------------------------------------
+#   All 19 layers complete
+#   Detection Head Complete
+#   Inference latency: 442.63 us (0.4426 ms)
+# 
+# [PHASE 4] Tensor Output Verification
+# --------------------------------------------------
+#   tensor_ready = 1
+#   Comparing with Golden Tensor
+#   Total Elements: 4080
+#   Mismatches: 0
+#   X-propagation: 507
+# 
+# ==========================================================
+#   VERIFICATION SUMMARY
+# ==========================================================
+#   Frame write check    : WARN
+#   X propagation (core) : 507
+#   Tensor mismatches    : 0 / 4080
+#   Inference latency    : 442.63 us
+#   Total errors         : 0
+# --------------------------------------------------
+#   RESULT: *** PASS ***
+# ==========================================================
+#   Simulation finished at time 1872945000
+# ==========================================================
+# ** Note: $finish    : ../top/tb/pl_edgeai_top_tb.sv(382)
+#    Time: 1872945 ns  Iteration: 1  Instance: /pl_edgeai_top_tb

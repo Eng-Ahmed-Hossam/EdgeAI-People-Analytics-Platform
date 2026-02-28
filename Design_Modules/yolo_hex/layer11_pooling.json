@@ -1,0 +1,6 @@
+{
+  "type": "max",
+  "kernel_size": 2,
+  "stride": 1,
+  "padding": 0
+}
