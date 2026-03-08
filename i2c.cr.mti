@@ -1,0 +1,43 @@
+{D:/GraduationProject/temp sensor/top_module_adt7420.v} {1 {vlog -work work -stats=none {D:/GraduationProject/temp sensor/top_module_adt7420.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Temperature_System
+
+Top level modules:
+	Temperature_System
+
+} {} {}} {D:/GraduationProject/temp sensor/i2c.v} {1 {vlog -work work -stats=none {D:/GraduationProject/temp sensor/i2c.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module i2c_master
+
+Top level modules:
+	i2c_master
+
+} {} {}} {D:/GraduationProject/temp sensor/adt7420_model.v} {1 {vlog -work work -stats=none {D:/GraduationProject/temp sensor/adt7420_model.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ADT7420_Driver
+
+Top level modules:
+	ADT7420_Driver
+
+} {} {}} {D:/GraduationProject/temp sensor/top_module_adt7420_tb.v} {1 {vlog -work work -stats=none {D:/GraduationProject/temp sensor/top_module_adt7420_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module top_system_tb
+
+Top level modules:
+	top_system_tb
+
+} {} {}} {D:/GraduationProject/temp sensor/i2c_tb.v} {1 {vlog -work work -stats=none {D:/GraduationProject/temp sensor/i2c_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module i2c_master_tb
+
+Top level modules:
+	i2c_master_tb
+
+} {} {}} {D:/GraduationProject/temp sensor/adt7420_model_tb.v} {1 {vlog -work work -stats=none {D:/GraduationProject/temp sensor/adt7420_model_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module adt7420_driver_tb
+
+Top level modules:
+	adt7420_driver_tb
+
+} {} {}}

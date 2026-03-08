@@ -1,0 +1,285 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vADT7420_Driver
+Z0 !s110 1772919039
+!i10b 1
+!s100 4iATTeMIHeC9mO3G3F>Eh2
+If2XXQ5am0SO7H_;EC?_9k1
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dD:/GraduationProject/temp sensor
+w1772919031
+Z3 8D:/GraduationProject/temp sensor/adt7420_model.v
+Z4 FD:/GraduationProject/temp sensor/adt7420_model.v
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1772919039.000000
+Z7 !s107 D:/GraduationProject/temp sensor/adt7420_model.v|
+Z8 !s90 -reportprogress|300|-work|work|-stats=none|D:/GraduationProject/temp sensor/adt7420_model.v|
+!i113 1
+Z9 o-work work
+Z10 tCvgOpt 0
+n@a@d@t7420_@driver
+vadt7420_driver_tb
+R0
+!i10b 1
+!s100 fdTn`K0BP5KACBh7a3Vz93
+IoV6h:8zB>jf<]B:g`<g3A1
+R1
+R2
+w1772919028
+Z11 8D:/GraduationProject/temp sensor/adt7420_model_tb.v
+Z12 FD:/GraduationProject/temp sensor/adt7420_model_tb.v
+L0 3
+R5
+r1
+!s85 0
+31
+R6
+Z13 !s107 D:/GraduationProject/temp sensor/adt7420_model_tb.v|
+Z14 !s90 -reportprogress|300|-work|work|-stats=none|D:/GraduationProject/temp sensor/adt7420_model_tb.v|
+!i113 1
+R9
+R10
+vadt7420_model
+!s110 1772760504
+!i10b 1
+!s100 M1fSc<LMk[`=lbVVcz_;42
+I]jZBbkWBnYUQU`i>:oRVO3
+R1
+R2
+w1772760498
+R3
+R4
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1772760504.000000
+R7
+R8
+!i113 1
+R9
+R10
+vadt7420_sensor
+!s110 1772917973
+!i10b 1
+!s100 `2WPgQOieJhilckI[jlZl1
+ISPL5=agIfQHQ<MA;`@Q><3
+R1
+R2
+w1772916412
+R3
+R4
+L0 2
+R5
+r1
+!s85 0
+31
+Z15 !s108 1772917972.000000
+R7
+R8
+!i113 1
+R9
+R10
+vadt7420_sensor_tb
+!s110 1772917972
+!i10b 1
+!s100 BHjWHd^g1`:acT`fLeN_R3
+I2i8LjPSRTP5LDUI>YeAzk1
+R1
+R2
+w1772916415
+R11
+R12
+L0 6
+R5
+r1
+!s85 0
+31
+R15
+R13
+R14
+!i113 1
+R9
+R10
+vadt7420_tb
+Z16 !s110 1772764854
+!i10b 1
+!s100 :GbG=bmiHcUK3YBob=Pe]0
+I0:lTRUGBdj]6FP0]3B9=G3
+R1
+R2
+w1772764831
+R11
+R12
+L0 3
+R5
+r1
+!s85 0
+31
+Z17 !s108 1772764854.000000
+R13
+R14
+!i113 1
+R9
+R10
+vadt7420_test
+!s110 1772758427
+!i10b 1
+!s100 Tgg[EXZa9bIJ=>a:9?6z93
+IL2hPDDQcbB4B=g9b@;@ba0
+R1
+R2
+w1772758412
+R11
+R12
+L0 3
+R5
+r1
+!s85 0
+31
+!s108 1772758426.000000
+R13
+R14
+!i113 1
+R9
+R10
+vi2c_master
+R0
+!i10b 1
+!s100 GdMgROdTZi1nhGa^?:F452
+ITWKL@o1@z`QaJ5YZlomPD2
+R1
+R2
+w1772917962
+Z18 8D:/GraduationProject/temp sensor/i2c.v
+Z19 FD:/GraduationProject/temp sensor/i2c.v
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+Z20 !s107 D:/GraduationProject/temp sensor/i2c.v|
+Z21 !s90 -reportprogress|300|-work|work|-stats=none|D:/GraduationProject/temp sensor/i2c.v|
+!i113 1
+R9
+R10
+vi2c_master_16bit
+!s110 1772764299
+!i10b 1
+!s100 2ASZB6e@KUHe6TVP`=c^B3
+ICV]E]^BPREI1V7Yh6CE>D3
+R1
+R2
+w1772764277
+R18
+R19
+L0 3
+R5
+r1
+!s85 0
+31
+!s108 1772764299.000000
+R20
+R21
+!i113 1
+R9
+R10
+vi2c_master_16bit_tb
+R16
+!i10b 1
+!s100 MB8DMVmPjohI?cLj;Q`fI0
+I]5dM2f^lzgk:>MeWdGfF23
+R1
+R2
+w1772764274
+Z22 8D:/GraduationProject/temp sensor/i2c_tb.v
+Z23 FD:/GraduationProject/temp sensor/i2c_tb.v
+L0 3
+R5
+r1
+!s85 0
+31
+R17
+Z24 !s107 D:/GraduationProject/temp sensor/i2c_tb.v|
+Z25 !s90 -reportprogress|300|-work|work|-stats=none|D:/GraduationProject/temp sensor/i2c_tb.v|
+!i113 1
+R9
+R10
+vi2c_master_tb
+R0
+!i10b 1
+!s100 =]13F@9`k_jUUeLB^ezMl3
+I5PoOjPj1h[K71VE[>H>_O3
+R1
+R2
+w1772918464
+R22
+R23
+L0 3
+R5
+r1
+!s85 0
+31
+R6
+R24
+R25
+!i113 1
+R9
+R10
+vTemperature_System
+!s110 1772919831
+!i10b 1
+!s100 I5I=b^G?N6RQ?V9k`mAnB3
+I8giCTMG]oDQ3[SGB]>XU82
+R1
+R2
+w1772919799
+8D:/GraduationProject/temp sensor/top_module_adt7420.v
+FD:/GraduationProject/temp sensor/top_module_adt7420.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1772919830.000000
+!s107 D:/GraduationProject/temp sensor/top_module_adt7420.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/GraduationProject/temp sensor/top_module_adt7420.v|
+!i113 1
+R9
+R10
+n@temperature_@system
+vtop_system_tb
+!s110 1772919826
+!i10b 1
+!s100 Tc`RnDKZAHnnnTB>g93j[3
+IQ3WmPo@W;2nbjkjb9fRG33
+R1
+R2
+w1772919797
+8D:/GraduationProject/temp sensor/top_module_adt7420_tb.v
+FD:/GraduationProject/temp sensor/top_module_adt7420_tb.v
+L0 3
+R5
+r1
+!s85 0
+31
+!s108 1772919826.000000
+!s107 D:/GraduationProject/temp sensor/top_module_adt7420_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/GraduationProject/temp sensor/top_module_adt7420_tb.v|
+!i113 1
+R9
+R10
