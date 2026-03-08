@@ -5,13 +5,11 @@ module adt7420_driver_tb();
     wire [15:0] temperature;
     wire data_valid;
     
-    // إشارات الربط مع الماستر (اللي هنختبرها)
     wire i2c_enable, i2c_rw;
     wire [7:0] i2c_data_in;
     reg [7:0] i2c_data_out;
     reg i2c_ready;
 
-    // استدعاء الـ Driver
     ADT7420_Driver uut (
         .clk(clk), .reset(reset),
         .temperature(temperature), .data_valid(data_valid),
@@ -20,37 +18,33 @@ module adt7420_driver_tb();
         .i2c_ready(i2c_ready)
     );
 
-    // توليد الساعة
     always #5 clk = ~clk;
 
     initial begin
-        // البداية
+        
         clk = 0; reset = 1; i2c_ready = 1; i2c_data_out = 8'h00;
         #100 reset = 0;
 
         $display("--- Starting Driver Test ---");
 
-        // المرحلة 1: الـ Driver المفروض يطلب تحديد السجل (Register Address)
         wait(i2c_enable == 1);
         $display("Time: %t | Driver requested Write to Reg: %h", $time, i2c_data_in);
-        #100 i2c_ready = 0; // نوهم الـ Driver إن الماستر بدأ يشتغل
-        #500 i2c_ready = 1; // نوهم الـ Driver إن الماستر خلص الكتابة
+        #100 i2c_ready = 0; 
+        #500 i2c_ready = 1; 
 
-        // المرحلة 2: الـ Driver المفروض يطلب قراءة الـ MSB (البايت العالي)
         wait(i2c_enable == 1 && i2c_rw == 1);
         $display("Time: %t | Driver requested Read MSB", $time);
-        i2c_data_out = 8'h1E; // هنبعت له 30 درجة (بايت عالي)
+        i2c_data_out = 8'h1E; 
         #100 i2c_ready = 0;
         #500 i2c_ready = 1;
 
-        // المرحلة 3: الـ Driver المفروض يطلب قراءة الـ LSB (البايت المنخفض)
         wait(i2c_enable == 1 && i2c_rw == 1);
         $display("Time: %t | Driver requested Read LSB", $time);
-        i2c_data_out = 8'h05; // بايت منخفض
+        i2c_data_out = 8'h05; 
         #100 i2c_ready = 0;
         #500 i2c_ready = 1;
 
-        // التأكد من النتيجة النهائية
+        
         wait(data_valid == 1);
         $display("-------------------------------------------");
         $display("SUCCESS: Full Temperature Received = %h", temperature);

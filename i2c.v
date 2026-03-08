@@ -1,8 +1,8 @@
 module i2c_master(
     input clk, reset,
-    input [6:0] addr,       // عنوان السينسور
-    input [7:0] data_in,    // البيانات المراد إرسالها (للـ Register)
-    input enable, rw,       // rw: 0 للكتابة، 1 للقراءة
+    input [6:0] addr,       // Sensor address
+    input [7:0] data_in,    // Data to be sent (to Register)
+    input enable, rw,       // rw: 0 for Write, 1 for Read
     output reg [7:0] data_out = 8'h00,
     output reg ready = 1, 
     output reg ack_error = 0,
@@ -10,23 +10,23 @@ module i2c_master(
     inout i2c_sda
 );
 
-    // حساب التوقيت: لنفترض clk=100MHz، نريد SCL=100KHz
-    // سنحتاج لتقسيم الساعة لأربع مراحل لكل نبضة SCL
+    // Timing calculation: assuming clk=100MHz, we want SCL=100KHz
+    // We need to divide the clock into four stages for each SCL pulse
     parameter DIVIDER = 250; 
     reg [15:0] count = 0;
-    reg scl_clk = 0; // ساعة داخلية أبطأ للتحكم في الحالات
+    reg scl_clk = 0; // Slow internal clock for state control
 
     reg [3:0] state = 0;
     reg [3:0] bit_cnt = 7;
     reg sda_out = 1;
     reg sda_en = 1;
 
-    // الحالات
+    // States
     localparam IDLE=0, START=1, ADDR=2, ACK1=3, WRITE=4, READ=5, ACK2=6, STOP=7;
 
     assign i2c_sda = (sda_en) ? sda_out : 1'bz;
 
-    // توليد التوقيت (Clock Divider)
+    // Clock Divider generation
     always @(posedge clk) begin
         if (count == (DIVIDER/4) - 1) begin
             count <= 0;
@@ -36,7 +36,7 @@ module i2c_master(
         end
     end
 
-    // الـ State Machine الرئيسية تعمل مع الـ Clock المقسومة
+    // Main State Machine operating with the divided clock
     always @(posedge scl_clk or posedge reset) begin
         if(reset) begin
             state <= IDLE;
@@ -59,15 +59,15 @@ module i2c_master(
                 end
 
                 START: begin
-                    sda_out <= 0; // SDA ينزل أولاً
+                    sda_out <= 0; // SDA goes low first
                     i2c_scl <= 1; 
                     state <= ADDR;
                     bit_cnt <= 7;
                 end
 
                 ADDR: begin
-                    i2c_scl <= ~i2c_scl; // تقليب الساعة
-                    if (i2c_scl == 1) begin // عند الحافة الهابطة نغير البيانات
+                    i2c_scl <= ~i2c_scl; // Toggle clock
+                    if (i2c_scl == 1) begin // Change data on falling edge
                         if (bit_cnt >= 1) begin
                             sda_out <= addr[bit_cnt-1];
                             bit_cnt <= bit_cnt - 1;
@@ -80,7 +80,7 @@ module i2c_master(
 
                 ACK1: begin
                     i2c_scl <= ~i2c_scl;
-                    sda_en <= 0; // نترك SDA للسينسور ليرسل ACK
+                    sda_en <= 0; // Release SDA for sensor to send ACK
                     if (i2c_scl == 1) begin
                         state <= (rw) ? READ : WRITE;
                         bit_cnt <= 7;
@@ -99,8 +99,8 @@ module i2c_master(
 
                 READ: begin
                     i2c_scl <= ~i2c_scl;
-                    sda_en <= 0; // نستقبل بيانات
-                    if (i2c_scl == 0) begin // نقرأ والـ SCL مرتفع
+                    sda_en <= 0; // Receiving data
+                    if (i2c_scl == 0) begin // Read while SCL is high
                         data_out[bit_cnt] <= i2c_sda;
                         if (bit_cnt > 0) bit_cnt <= bit_cnt - 1;
                         else state <= ACK2;
@@ -109,7 +109,7 @@ module i2c_master(
 
                 ACK2: begin
                     i2c_scl <= ~i2c_scl;
-                    sda_en <= (rw) ? 1 : 0; // Master يرسل NACK في القراءة أو يستقبل ACK في الكتابة
+                    sda_en <= (rw) ? 1 : 0; // Master sends NACK in Read or receives ACK in Write
                     sda_out <= 1; // NACK
                     if (i2c_scl == 1) state <= STOP;
                 end
@@ -120,7 +120,7 @@ module i2c_master(
                         sda_en <= 1;
                         sda_out <= 0;
                     end else begin
-                        sda_out <= 1; // رفع SDA والـ SCL مرتفع = STOP
+                        sda_out <= 1; // Pulling SDA high while SCL is high = STOP
                         state <= IDLE;
                     end
                 end

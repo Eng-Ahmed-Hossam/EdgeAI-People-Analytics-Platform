@@ -14,7 +14,6 @@ module i2c_master_tb();
     wire i2c_scl;
     wire i2c_sda;
 
-    // استدعاء موديول الماستر
     i2c_master uut (
         .clk(clk), .reset(reset), .addr(addr),
         .data_in(data_in), .enable(enable), .rw(rw),
@@ -22,11 +21,10 @@ module i2c_master_tb();
         .ack_error(ack_error), .i2c_scl(i2c_scl), .i2c_sda(i2c_sda)
     );
 
-    // توليد الساعة 100MHz
     always #5 clk = ~clk;
 
-    // محاكاة السينسور (Slave Mock)
-    reg [7:0] sensor_mock_data = 8'h2A; // القيمة المتوقعة 0x2A
+    // (Slave Mock)
+    reg [7:0] sensor_mock_data = 8'h2A; 
     integer bit_idx = 7;
 
     assign i2c_sda = (uut.state == 3 || (uut.state == 6 && uut.rw == 0)) ? 1'b0 : 
@@ -53,11 +51,11 @@ module i2c_master_tb();
         // 2. Write Operation
         #100;
         addr = 7'h4B; data_in = 8'h01; rw = 0; enable = 1;
-        #100; // تأخير ضروري لضمان استجابة الماستر
+        #100;
         if (ready) wait(ready == 0); 
         enable = 0; 
         
-        wait(ready == 1); // انتظر حتى تنتهي نبضات الـ SCL
+        wait(ready == 1);  
         $display("Time: %0t | Action: Write Operation Finished", $time);
 
         #5000; 

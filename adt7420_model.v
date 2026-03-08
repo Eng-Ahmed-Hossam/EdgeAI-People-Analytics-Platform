@@ -1,9 +1,9 @@
 module ADT7420_Driver (
     input clk, reset,
-    output reg [15:0] temperature, // هنا ستخزن درجة الحرارة كاملة
+    output reg [15:0] temperature, // Complete temperature value storage
     output reg data_valid,
     
-    // التوصيل مع الـ I2C Master الذي صنعناه
+    // Connection with the custom I2C Master
     output reg i2c_enable,
     output reg i2c_rw,
     output reg [7:0] i2c_data_in,
@@ -25,17 +25,17 @@ module ADT7420_Driver (
                 IDLE: begin
                     data_valid <= 0;
                     if(i2c_ready) begin
-                        i2c_data_in <= 8'h00; // عنوان سجل الحرارة داخل السينسور
-                        i2c_rw <= 0;          // أمر كتابة لاختيار السجل
+                        i2c_data_in <= 8'h00; // Temperature register address inside the sensor
+                        i2c_rw <= 0;           // Write command to select the register
                         i2c_enable <= 1;
                         state <= ADDR_REG;
                     end
                 end
                 
                 ADDR_REG: begin
-                    if(!i2c_ready) i2c_enable <= 0; // انتظر حتى يبدأ الماستر
+                    if(!i2c_ready) i2c_enable <= 0; // Wait for Master to start
                     if(i2c_ready && !i2c_enable) begin
-                        i2c_rw <= 1;          // الآن نطلب قراءة
+                        i2c_rw <= 1;           // Now request a read
                         i2c_enable <= 1;
                         state <= READ_MSB;
                     end
@@ -44,8 +44,8 @@ module ADT7420_Driver (
                 READ_MSB: begin
                     if(!i2c_ready) i2c_enable <= 0;
                     if(i2c_ready && !i2c_enable) begin
-                        temperature[15:8] <= i2c_data_out; // حفظ البايت الأول
-                        i2c_enable <= 1;      // طلب البايت الثاني
+                        temperature[15:8] <= i2c_data_out; // Store the first byte
+                        i2c_enable <= 1;      // Request the second byte
                         state <= READ_LSB;
                     end
                 end
@@ -53,14 +53,14 @@ module ADT7420_Driver (
                 READ_LSB: begin
                     if(!i2c_ready) i2c_enable <= 0;
                     if(i2c_ready && !i2c_enable) begin
-                        temperature[7:0] <= i2c_data_out;  // حفظ البايت الثاني
+                        temperature[7:0] <= i2c_data_out;  // Store the second byte
                         state <= DONE;
                     end
                 end
 
                 DONE: begin
                     data_valid <= 1;
-                    state <= IDLE; // كرر العملية باستمرار
+                    state <= IDLE; // Continuous polling
                 end
             endcase
         end
