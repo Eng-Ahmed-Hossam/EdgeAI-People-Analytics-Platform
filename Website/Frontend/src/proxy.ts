@@ -1,32 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Routes that require an authenticated session.
-// The proxy checks for cookie presence only (fast, no DB round-trip).
-// An expired or invalid cookie bypasses this check; the AuthGuard client
-// component handles that case by calling GET /api/auth/me and redirecting if
-// the session is no longer valid.
-const PROTECTED_PREFIXES = [
-  "/workspace",
-  "/compare",
-  "/dashboard",
-  "/report",
-  "/account",
-];
-
-export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  const isProtected = PROTECTED_PREFIXES.some(
-    (p) => pathname === p || pathname.startsWith(p + "/")
-  );
-
-  if (isProtected && !request.cookies.get("access_token")) {
-    const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(loginUrl);
-  }
-
+// Session cookies are set by the Railway backend (a different domain).
+// The proxy runs on Vercel and cannot read cross-domain cookies, so a
+// cookie-presence check here would always fail and redirect logged-in users
+// back to /login on every navigation.
+//
+// All auth protection is handled client-side by AuthGuard (components/navigation/AuthGuard.tsx):
+//   - While loading: shows "Verifying session…"
+//   - On load: calls GET /api/auth/me (cross-domain, credentials:include) to restore session
+//   - If not authenticated: redirects to /login?next=<current-path>
+//
+// This proxy exists as a structural placeholder (e.g. for future non-cookie
+// checks, A/B routing, or header manipulation) but must not redirect based on
+// cookie presence.
+export function proxy(_request: NextRequest) {
   return NextResponse.next();
 }
 
