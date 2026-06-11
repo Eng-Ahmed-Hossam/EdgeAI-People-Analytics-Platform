@@ -114,35 +114,54 @@ module i2c_master #(
 
                 // ── Data phase: 8 bits MSB first ─────────────────────────
                 WR_DATA: begin
-                    if (tick) begin
-                        // Quarter-period sequencing using clk_cnt edges:
-                        // Q0: set SDA, Q1: SCL high, Q2: sample (read), Q3: SCL low
-                        // We re-use clk_cnt being 0 right after tick to track phase.
-                        // Simplified: toggle SCL each tick; two ticks per bit
-                        if (!scl) begin
-                            // SCL is low: put next data bit on SDA
-                            sda_en  <= 1'b1;
-                            if (!read)
-                                sda_out <= shift_reg[7];
-                            else
-                                sda_en <= 1'b0; // release for slave to drive
-                            scl <= 1'b1;       // raise SCL
-                        end else begin
-                            // SCL is high: sample SDA (read) or shift (write)
-                            if (read)
-                                shift_reg <= {shift_reg[6:0], sda};
-                            scl <= 1'b0;       // lower SCL
-                            if (bit_cnt == 3'd0) begin
-                                data_out <= read ? {shift_reg[6:0], sda} : data_out;
-                                state    <= read ? RD_ACK : WR_ACK;
-                            end else begin
-                                shift_reg <= {shift_reg[6:0], 1'b0};
-                                bit_cnt   <= bit_cnt - 1'b1;
-                            end
-                        end
-                    end
+                     if (tick) begin
+
+        // =========================
+        // PHASE 1: SCL LOW → SETUP
+        // =========================
+                        if (scl == 1'b0) begin
+                             if (read) begin
+                // Release SDA so slave can drive
+                            sda_en <= 1'b0;
+                        end 
+                        else begin
+                // Drive MSB on SDA
+                         sda_en  <= 1'b1;
+                        sda_out <= shift_reg[7];
+                         end
+
+            // Raise clock
+                 scl <= 1'b1;
+        end
+
+        // =========================
+        // PHASE 2: SCL HIGH → SAMPLE / SHIFT
+        // =========================
+        else begin
+            scl <= 1'b0;  // Lower clock
+
+            if (bit_cnt == 3'd0) begin
+                // ===== LAST BIT =====
+                if (read) begin
+                    data_out <= {shift_reg[6:0], sda}; // final sample
                 end
 
+                state <= read ? RD_ACK : WR_ACK;
+            end else begin
+                // ===== SHIFT =====
+                if (read) begin
+                    // Shift in from slave
+                    shift_reg <= {shift_reg[6:0], sda};
+                end else begin
+                    // Shift out (prepare next bit)
+                    shift_reg <= {shift_reg[6:0], 1'b0};
+                end
+
+                bit_cnt <= bit_cnt - 1'b1;
+            end
+        end
+    end
+end
                 // ── ACK from slave (after write) ─────────────────────────
                 WR_ACK: begin
                     if (tick) begin
