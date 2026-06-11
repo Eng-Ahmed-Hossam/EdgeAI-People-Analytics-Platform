@@ -1,0 +1,44 @@
+# ── Vivado / tool build outputs ────────────────────────────────
+*.exe
+*.bit
+*.dcp
+*.jou
+*.str
+.Xil/
+*.backup.log
+
+# ── Model binaries & media (large external assets) ─────────────
+*.pt
+*.weights
+*.caffemodel
+*.onnx
+*.pb
+*.mov
+*.mp4
+*.avi
+*.avif
+*.pdf
+
+# ── External reference model project ───────────────────────────
+# Separate Python component; contains a nested git repo + large
+# model binaries/videos. Keep it out of the RTL/co-design repo.
+Golden_Model/
+
+# ── Large standalone weight-hex blob dir ───────────────────────
+yolo_hex/
+
+# ── Generated golden outputs (reproducible from sim scripts) ───
+sim/golden_real_output/
+
+# ── ModelSim compiled libraries & sim run artifacts (generated) ─
+work/
+*_work/
+*.wlf
+transcript
+*.vstf
+modelsim.ini
+vsim_stacktrace.vstf
+
+# ── OS cruft ───────────────────────────────────────────────────
+Thumbs.db
+.DS_Store
