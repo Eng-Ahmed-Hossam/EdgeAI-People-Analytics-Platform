@@ -1,10 +1,3 @@
-"""
-Asset CRUD operations.
-
-The API layer knows nothing about PostGIS internals — that boundary lives here.
-All geometry extraction (WKB → shapely → lat/lng) happens in asset_to_response().
-"""
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,20 +5,11 @@ from app.models.asset import Asset as AssetModel
 from app.schemas.asset import AssetCoordinates, AssetResponse
 
 
-def _extract_coords(location) -> AssetCoordinates:
-    """Extract lat/lng from a GeoAlchemy2 WKBElement."""
-    from geoalchemy2.shape import to_shape
-
-    point = to_shape(location)
-    # Shapely convention: point.x = longitude, point.y = latitude
-    return AssetCoordinates(lat=point.y, lng=point.x)
-
-
 def asset_to_response(db_asset: AssetModel) -> AssetResponse:
     """Convert an ORM Asset row to the camelCase API response schema."""
     return AssetResponse(
         id=db_asset.id,
-        coordinates=_extract_coords(db_asset.location),
+        coordinates=AssetCoordinates(lat=db_asset.latitude, lng=db_asset.longitude),
         address=db_asset.address,
         area=db_asset.area,
         size=db_asset.size,
@@ -40,14 +24,6 @@ def asset_to_response(db_asset: AssetModel) -> AssetResponse:
 
 
 async def get_all_assets(db: AsyncSession) -> list[AssetResponse]:
-    """
-    Return all active, market-visible assets.
-
-    Filters:
-    - is_active = True  (not soft-deleted)
-    - availability_status IN ('available', 'reserved')  (market-visible states)
-    - 'expired' is a lifecycle state for the DB only; never returned via the API
-    """
     stmt = (
         select(AssetModel)
         .where(
@@ -62,10 +38,6 @@ async def get_all_assets(db: AsyncSession) -> list[AssetResponse]:
 
 
 async def get_asset_by_id(db: AsyncSession, asset_id: str) -> AssetResponse | None:
-    """
-    Return a single asset by ID regardless of availability_status.
-    Returns None (→ 404) if not found or soft-deleted.
-    """
     stmt = select(AssetModel).where(
         AssetModel.id == asset_id,
         AssetModel.is_active.is_(True),

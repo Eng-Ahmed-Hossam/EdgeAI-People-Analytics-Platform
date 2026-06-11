@@ -23,9 +23,6 @@ from app.database import Base
 async def main() -> None:
     engine = create_async_engine(settings.database_url, echo=True)
     async with engine.begin() as conn:
-        # PostGIS must exist before creating geometry columns
-        await conn.execute(text("CREATE EXTENSION IF NOT EXISTS postgis"))
-        await conn.execute(text("CREATE EXTENSION IF NOT EXISTS postgis_topology"))
         await conn.run_sync(Base.metadata.create_all)
     await engine.dispose()
     print("All tables created.")

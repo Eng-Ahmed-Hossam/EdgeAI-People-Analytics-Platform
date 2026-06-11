@@ -1,12 +1,8 @@
-"""Create assets table with PostGIS geometry column
+"""Create assets table
 
 Revision ID: 001
 Revises:
 Create Date: 2026-06-09
-
-Prerequisites:
-  - PostgreSQL with PostGIS extension installed
-  - Run `CREATE EXTENSION IF NOT EXISTS postgis;` on the target DB before applying.
 
 Apply: alembic upgrade head
 Revert: alembic downgrade -1
@@ -16,7 +12,6 @@ from typing import Union
 
 import sqlalchemy as sa
 from alembic import op
-from geoalchemy2 import Geometry
 
 revision: str = "001"
 down_revision: Union[str, None] = None
@@ -25,23 +20,14 @@ depends_on = None
 
 
 def upgrade() -> None:
-    # PostGIS extension must exist before creating a geometry column
-    op.execute("CREATE EXTENSION IF NOT EXISTS postgis")
-    op.execute("CREATE EXTENSION IF NOT EXISTS postgis_topology")
-
     op.create_table(
         "assets",
         # ── Identity ──────────────────────────────────────────────────────────
         sa.Column("id", sa.String(255), primary_key=True),
 
         # ── Spatial ───────────────────────────────────────────────────────────
-        # POINT in WGS84 (SRID 4326). GeoAlchemy2 registers the geometry column
-        # with PostGIS and creates a spatial index automatically.
-        sa.Column(
-            "location",
-            Geometry("POINT", srid=4326, spatial_index=True),
-            nullable=False,
-        ),
+        sa.Column("latitude", sa.Float, nullable=False),
+        sa.Column("longitude", sa.Float, nullable=False),
 
         # ── Location descriptors ──────────────────────────────────────────────
         sa.Column("address", sa.String(500), nullable=False),
@@ -55,7 +41,6 @@ def upgrade() -> None:
 
         # ── Classification ────────────────────────────────────────────────────
         sa.Column("property_type", sa.String(50), nullable=False, server_default="retail_unit"),
-        # Allowed: available | reserved | occupied | sold | expired
         sa.Column("availability_status", sa.String(20), nullable=False, server_default="available"),
 
         # ── Provenance ────────────────────────────────────────────────────────
@@ -79,22 +64,27 @@ def upgrade() -> None:
         sa.Column("is_active", sa.Boolean, nullable=False, server_default="true"),
     )
 
-    # Deduplication constraint: same source cannot have two records for the same listing
     op.create_unique_constraint(
         "uq_asset_source_listing",
         "assets",
         ["source", "source_listing_id"],
     )
 
-    # Composite index for the most common API query pattern
     op.create_index(
         "ix_assets_status_active",
         "assets",
         ["availability_status", "is_active"],
     )
 
+    op.create_index(
+        "ix_assets_lat_lng",
+        "assets",
+        ["latitude", "longitude"],
+    )
+
 
 def downgrade() -> None:
+    op.drop_index("ix_assets_lat_lng", table_name="assets")
     op.drop_index("ix_assets_status_active", table_name="assets")
     op.drop_constraint("uq_asset_source_listing", "assets", type_="unique")
     op.drop_table("assets")

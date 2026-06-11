@@ -20,7 +20,6 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
-from geoalchemy2.elements import WKTElement
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.asset import Asset as AssetModel
@@ -59,11 +58,6 @@ class SyncReport:
             f"inserted={self.inserted} updated={self.updated} "
             f"skipped={self.skipped} errors={self.errors}"
         )
-
-
-def _make_point(lat: float, lng: float) -> WKTElement:
-    """Create a PostGIS WKT geometry from lat/lng. WKT order is POINT(lng lat)."""
-    return WKTElement(f"POINT({lng} {lat})", srid=4326)
 
 
 def _generate_id(normalized: NormalizedAsset) -> str:
@@ -128,7 +122,8 @@ class SyncJob:
         now = datetime.now(timezone.utc)
         asset = AssetModel(
             id=_generate_id(normalized),
-            location=_make_point(normalized.lat, normalized.lng),
+            latitude=normalized.lat,
+            longitude=normalized.lng,
             address=normalized.address,
             area=normalized.area,
             size=normalized.size,
