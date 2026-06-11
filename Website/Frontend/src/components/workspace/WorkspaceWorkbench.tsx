@@ -1,8 +1,15 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { DecisionMap } from "@/components/workspace/DecisionMap";
+
+// maplibre-gl must not run during SSR — dynamic import with ssr:false is the
+// belt-and-suspenders companion to serverExternalPackages in next.config.ts.
+const DecisionMap = dynamic(
+  () => import("@/components/workspace/DecisionMap").then((m) => ({ default: m.DecisionMap })),
+  { ssr: false, loading: () => <div className="h-full w-full bg-sunken" /> }
+);
 import { WorkspaceSidePanel } from "@/components/workspace/WorkspaceSidePanel";
 import { AssessmentHistory } from "@/components/workspace/AssessmentHistory";
 import {
