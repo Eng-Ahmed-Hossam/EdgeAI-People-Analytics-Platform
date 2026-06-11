@@ -99,11 +99,12 @@ module pooling_unit #(
     // ========================================================================
     always @(posedge clk) begin
         if (rst || frame_sync) begin
-            col_cnt   <= 0;
-            row_cnt   <= 0;
-            col_max   <= {1'b1, {(DATA_WIDTH-1){1'b0}}};  // INT8_MIN
-            data_out  <= 0;
-            out_valid <= 1'b0;
+            col_cnt      <= 0;
+            row_cnt      <= 0;
+            col_max      <= {1'b1, {(DATA_WIDTH-1){1'b0}}};  // INT8_MIN
+            prev_row_max <= {1'b1, {(DATA_WIDTH-1){1'b0}}};  // INT8_MIN
+            data_out     <= 0;
+            out_valid    <= 1'b0;
         end else begin
             out_valid <= 1'b0;
             

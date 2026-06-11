@@ -24,11 +24,11 @@
 # model binaries/videos. Keep it out of the RTL/co-design repo.
 Golden_Model/
 
-# ── Large standalone weight-hex blob dir ───────────────────────
-yolo_hex/
+# ── Large standalone weight-hex blob dir (root only) ───────────
+/yolo_hex/
 
 # ── Generated golden outputs (reproducible from sim scripts) ───
-sim/golden_real_output/
+**/golden_real_output/
 
 # ── ModelSim compiled libraries & sim run artifacts (generated) ─
 work/

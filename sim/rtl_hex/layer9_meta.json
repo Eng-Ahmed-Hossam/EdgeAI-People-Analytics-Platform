@@ -1,8 +1,0 @@
-{
-  "rtl_layer_index": 9,
-  "type": "pool",
-  "pool_type": "max",
-  "kernel_size": 2,
-  "stride": 2,
-  "padding": 0
-}
