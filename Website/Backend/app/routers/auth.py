@@ -10,7 +10,9 @@ Security rules:
   - Passwords are hashed with bcrypt before storage; plaintext never persists.
   - Login failure always returns the same "Invalid credentials." message,
     regardless of whether the email exists — prevents user enumeration.
-  - JWT is stored in an httpOnly, SameSite=Lax cookie named 'access_token'.
+  - JWT is stored in an httpOnly cookie named 'access_token'.
+    SameSite=None (Secure) in production for cross-domain use (Vercel → Railway).
+    SameSite=Lax in local dev (same-site localhost, no Secure flag needed).
     It is never returned in the response body and never in JavaScript-accessible
     storage. The frontend receives a UserResponse, not a token.
   - COOKIE_SECURE controls the Secure flag: False for local HTTP dev, True in
@@ -52,13 +54,21 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 _COOKIE_NAME = "access_token"
 
 
+def _samesite() -> str:
+    # SameSite=None is required for cross-domain cookies (frontend on vercel.app,
+    # backend on railway.app). SameSite=None MUST be paired with Secure=True —
+    # only valid over HTTPS, which is always the case in production.
+    # Local dev uses SameSite=Lax (no Secure flag, plain HTTP localhost).
+    return "none" if settings.cookie_secure else "lax"
+
+
 def _set_auth_cookie(response: Response, token: str) -> None:
     """Attach the httpOnly session cookie to the response."""
     response.set_cookie(
         key=_COOKIE_NAME,
         value=token,
         httponly=True,
-        samesite="lax",
+        samesite=_samesite(),
         secure=settings.cookie_secure,
         max_age=settings.access_token_expire_minutes * 60,
         path="/",
@@ -71,7 +81,8 @@ def _clear_auth_cookie(response: Response) -> None:
         key=_COOKIE_NAME,
         path="/",
         httponly=True,
-        samesite="lax",
+        samesite=_samesite(),
+        secure=settings.cookie_secure,
     )
 
 
