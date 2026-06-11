@@ -1,3 +1,4 @@
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,6 +10,17 @@ class Settings(BaseSettings):
     )
 
     database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/edgeai"
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _ensure_asyncpg_driver(cls, v: str) -> str:
+        # Railway (and most managed Postgres services) emit postgresql:// or
+        # postgres:// — SQLAlchemy asyncpg requires postgresql+asyncpg://.
+        if isinstance(v, str):
+            v = v.replace("postgres://", "postgresql://", 1)
+            if v.startswith("postgresql://"):
+                v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return v
     backend_host: str = "0.0.0.0"
     backend_port: int = 8000
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
