@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   EDGEAI LOCATION INTELLIGENCE — GLOBAL DESIGN TOKENS
+   All Section 3 values from CLAUDE.md. Do not add ad-hoc values here;
+   extend this file and reference from component code.
+   ───────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* ── Foundation ── */
+  --color-page:     #020617;            /* outermost bg — slate-950; utility: bg-page    */
+  --color-surface:  #0F172A;            /* card, panel — slate-900                       */
+  --color-raised:   #1E293B;            /* element within surface — slate-800            */
+  --color-sunken:   #080E1A;            /* recessed inputs, table fills                  */
+  --color-hairline: rgba(30,41,59,0.6); /* hairline — slate-800 at 60%                  */
+  --color-rule:     #334155;            /* stronger border — slate-700                   */
+
+  /* ── Ink — light on dark ── */
+  --color-ink-strong: #F8FAFC;  /* headlines, primary numbers — slate-50   */
+  --color-ink-body:   #CBD5E1;  /* body text — slate-300                   */
+  --color-ink-muted:  #94A3B8;  /* secondary metrics, captions — slate-400 */
+  --color-ink-faint:  #64748B;  /* disabled, footnotes — slate-500         */
+
+  /* ── Accent — restrained; CTA and key signal only ── */
+  --color-accent:        #2563EB;              /* primary CTA — blue-600                   */
+  --color-accent-hover:  #1D4ED8;              /* blue-700                                 */
+  --color-accent-muted:  #60A5FA;              /* softer accent: icon accents, highlights — blue-400 */
+  --color-accent-soft:   rgba(37,99,235,0.15); /* accent wash                              */
+  --color-accent-dim:    #172554;              /* deep blue bg — blue-950                  */
+  --color-accent-data:   #22D3EE;              /* cyan data emphasis — cyan-400            */
+
+  /* ── Signal — verdict only; never decoration ── */
+  --color-verdict-strong:      #10B981;               /* emerald-500            */
+  --color-verdict-good:        #34D399;               /* emerald-400            */
+  --color-verdict-warn:        #F59E0B;               /* amber-500              */
+  --color-verdict-weak:        #EF4444;               /* red-500                */
+  --color-verdict-strong-wash: rgba(16,185,129,0.12);
+  --color-verdict-warn-wash:   rgba(245,158,11,0.12);
+  --color-verdict-weak-wash:   rgba(239,68,68,0.12);
+
+  /* ── Status — spatial map markers; distinct from verdict signals ── */
+  --color-status-high: #22C55E;  /* green-500  */
+  --color-status-med:  #06B6D4;  /* cyan-500   */
+  --color-status-low:  #F97316;  /* orange-500 */
+
+  /* ── Font families ── */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body:    var(--font-ibm-plex-sans), system-ui, sans-serif;
+  --font-mono:    var(--font-ibm-plex-mono), "Courier New", monospace;
+
+  /* ── Type scale ── */
+  --text-display: 3rem;
+
+  /* ── Border radius — restrained, never pill-shaped ── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* ── Elevation — hairlines over drop shadows; stronger on dark ── */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-pop:  0 4px 24px rgba(0,0,0,0.40);
+}
+
+/* ── CLAUDE.md Section 3 exact variable names (aliases to @theme vars) ── */
+:root {
+  --bg-page:    var(--color-page);
+  --bg-surface: var(--color-surface);
+  --bg-raised:  var(--color-raised);
+  --bg-sunken:  var(--color-sunken);
+  --border-hair:   var(--color-hairline);
+  --border-strong: var(--color-rule);
+
+  --ink-strong: var(--color-ink-strong);
+  --ink-body:   var(--color-ink-body);
+  --ink-muted:  var(--color-ink-muted);
+  --ink-faint:  var(--color-ink-faint);
+
+  --accent:        var(--color-accent);
+  --accent-hover:  var(--color-accent-hover);
+  --accent-muted:  var(--color-accent-muted);
+  --accent-soft:   var(--color-accent-soft);
+  --accent-dim:    var(--color-accent-dim);
+  --accent-data:   var(--color-accent-data);
+
+  --signal-strong:    var(--color-verdict-strong);
+  --signal-good:      var(--color-verdict-good);
+  --signal-warn:      var(--color-verdict-warn);
+  --signal-weak:      var(--color-verdict-weak);
+  --signal-strong-bg: var(--color-verdict-strong-wash);
+  --signal-warn-bg:   var(--color-verdict-warn-wash);
+  --signal-weak-bg:   var(--color-verdict-weak-wash);
+
+  --status-high: var(--color-status-high);
+  --status-med:  var(--color-status-med);
+  --status-low:  var(--color-status-low);
+
+  /* Spacing scale (4px base) */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+  /* Radius */
+  --r-sm: 4px; --r-md: 6px; --r-lg: 10px;
+}
+
+/* ── Base element styles ── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--color-page);
+    color: var(--color-ink-body);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tabular figures for all monospace usage */
+  .font-mono, [data-tabular] {
+    font-feature-settings: "tnum" 1, "zero" 1;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-ink-strong);
+    line-height: 1.2;
+  }
+
+  /* Focus ring: consistent and accessible */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--r-sm);
+  }
+
+  /* Scrollbars: quiet, tokenized, and consistent across dense intelligence surfaces */
+  * {
+    scrollbar-color:
+      color-mix(in srgb, var(--color-raised), var(--color-accent-data) 14%)
+      transparent;
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    min-height: 48px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-raised), var(--color-accent-data) 18%),
+        color-mix(in srgb, var(--color-raised), var(--color-accent) 10%)
+      )
+      border-box;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-raised), var(--color-accent-data) 34%),
+        color-mix(in srgb, var(--color-raised), var(--color-accent) 22%)
+      )
+      border-box;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background: var(--color-accent-data);
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  .scrollbar-quiet {
+    scrollbar-color: color-mix(in srgb, var(--color-raised), transparent 18%)
+      transparent;
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-quiet::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-raised), transparent 12%);
+    background-clip: padding-box;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .edgeai-marker {
+    --marker-color: var(--color-accent-data);
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--marker-color), white 18%);
+    background:
+      radial-gradient(circle at center, var(--marker-color) 0 36%, transparent 38%),
+      color-mix(in srgb, var(--marker-color), transparent 76%);
+    box-shadow:
+      0 0 0 5px color-mix(in srgb, var(--marker-color), transparent 84%),
+      0 8px 22px rgba(0, 0, 0, 0.42);
+    color: var(--color-ink-strong);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  }
+
+  .edgeai-marker:hover,
+  .edgeai-marker:focus-visible {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--marker-color), transparent 82%),
+      0 10px 26px rgba(0, 0, 0, 0.52);
+  }
+
+  .edgeai-marker--selected {
+    border-color: var(--color-ink-strong);
+    transform: scale(1.12);
+  }
+
+  .edgeai-marker--high {
+    --marker-color: var(--color-status-high);
+  }
+
+  .edgeai-marker--medium {
+    --marker-color: var(--color-status-med);
+  }
+
+  .edgeai-marker--low {
+    --marker-color: var(--color-status-low);
+  }
+
+  .edgeai-marker--weak {
+    --marker-color: var(--color-verdict-weak);
+  }
+
+  .edgeai-marker--pending {
+    --marker-color: var(--color-accent-muted);
+  }
+
+  .maplibregl-ctrl-group {
+    overflow: hidden !important;
+    border: 1px solid var(--border-hair) !important;
+    border-radius: var(--r-md) !important;
+    background: var(--bg-surface) !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  .maplibregl-ctrl-group button {
+    background-color: var(--bg-surface) !important;
+  }
+
+  .maplibregl-ctrl-group button:hover {
+    background-color: var(--bg-raised) !important;
+  }
+
+  .maplibregl-ctrl button span {
+    filter: invert(1) opacity(0.72);
+  }
+
+  .maplibregl-ctrl-attrib {
+    border: 1px solid var(--border-hair);
+    border-radius: var(--r-sm);
+    background: rgba(15, 23, 42, 0.84) !important;
+    color: var(--ink-faint);
+    font-family: var(--font-body);
+  }
+
+  .maplibregl-ctrl-attrib a {
+    color: var(--accent-muted);
+  }
+}

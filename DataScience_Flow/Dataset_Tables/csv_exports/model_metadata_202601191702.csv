@@ -1,0 +1,5 @@
+"model_version","model_type","training_start_date","training_end_date","feature_set_version","evaluation_mae","evaluation_r2"
+v1.0_revenue_lgbm,LightGBM Regression,2024-08-01,2024-09-15,feature_store_v1,382.5400,0.7321
+v1.1_revenue_stack,Stacked Ensemble,2024-08-01,2024-09-15,feature_store_v2,355.7100,0.7645
+v1.0_profit_rf,Random Forest,2024-08-01,2024-09-15,feature_store_v1,84.2900,0.6832
+v1.0_feasibility_logreg,Logistic Regression,2024-08-01,2024-09-15,feature_store_v1,0.1412,0.8214
