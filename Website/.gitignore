@@ -1,0 +1,20 @@
+﻿# Frontend build artifacts
+Frontend/.next/
+Frontend/node_modules/
+Frontend/out/
+
+# Backend secrets and runtime
+Backend/.env
+Backend/.env.local
+Backend/.env.production
+Backend/*.log
+
+# Python bytecode
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

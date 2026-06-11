@@ -1,0 +1,39 @@
+# Secrets
+.env
+.env.local
+.env.production
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.Python
+dist/
+build/
+.venv/
+venv/
+env/
+.eggs/
+
+# Logs
+*.log
+uvicorn.log
+uvicorn_err.log
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# MyPy / Pyright
+.mypy_cache/
+.dmypy.json
+pyrightconfig.json
+
+# Coverage
+.coverage
+htmlcov/
