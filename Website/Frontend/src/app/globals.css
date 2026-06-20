@@ -100,6 +100,30 @@
 
   /* Radius */
   --r-sm: 4px; --r-md: 6px; --r-lg: 10px;
+
+  /* Layout and shell */
+  --nav-width: 280px;
+  --nav-rail-width: 72px;
+  --topbar-height: 64px;
+  --mobile-tabbar-height: 64px;
+  --content-max: 1180px;
+  --memo-max: 1240px;
+  --panel-width: 440px;
+  --panel-width-wide: 520px;
+
+  /* Phase 0A semantic registers */
+  --register-operational-bg: var(--color-page);
+  --register-operational-surface: var(--color-surface);
+  --register-intelligence-bg: var(--color-page);
+  --register-report-bg: var(--color-page);
+
+  /* Freshness and interaction */
+  --fresh-live: var(--color-status-high);
+  --fresh-recent: var(--color-accent-muted);
+  --fresh-delayed: var(--color-verdict-warn);
+  --focus-ring: var(--color-accent);
+  --hover-surface: var(--color-raised);
+  --active-surface: var(--color-sunken);
 }
 
 /* ── Base element styles ── */

@@ -108,7 +108,7 @@ function AssetSearchSurface({
               "transition-colors hover:border-accent hover:text-accent",
               "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
             )}
-            title="View saved portfolio"
+            title="View saved assessments"
           >
             {/* Bookmark icon */}
             <svg
@@ -121,7 +121,7 @@ function AssetSearchSurface({
             >
               <path d="M1 1h7a.5.5 0 01.5.5v9l-4-2-4 2V1.5A.5.5 0 011 1z" />
             </svg>
-            Portfolio
+            Saved
             {savedCount > 0 && (
               <span className="font-mono text-[10px] text-accent-muted">
                 {savedCount}
@@ -445,9 +445,9 @@ export function WorkspaceWorkbench() {
   );
 
   return (
-    <div className="relative flex h-full min-h-180 overflow-hidden bg-page text-ink-body lg:min-h-0">
+    <div className="grid min-h-full bg-page text-ink-body lg:h-full lg:grid-cols-[minmax(360px,0.95fr)_minmax(420px,1.05fr)]">
       {/* Map area — fills remaining width */}
-      <section className="relative min-w-0 flex-1 basis-[74%]">
+      <section className="relative order-2 min-h-72 overflow-hidden border-t border-hairline lg:order-1 lg:min-h-0 lg:border-r lg:border-t-0">
         <DecisionMap
           assets={assets}
           selectedAsset={selectedAsset}
@@ -471,6 +471,7 @@ export function WorkspaceWorkbench() {
       </section>
 
       {/* Right panel — toggles between workspace panel and portfolio history */}
+      <section className="order-1 min-h-[calc(100vh-var(--topbar-height)-var(--mobile-tabbar-height))] overflow-hidden bg-surface lg:order-2 lg:min-h-0">
       {showHistory ? (
         <AssessmentHistory
           onClose={() => setShowHistory(false)}
@@ -504,6 +505,7 @@ export function WorkspaceWorkbench() {
           onReset={handleReset}
         />
       )}
+      </section>
     </div>
   );
 }

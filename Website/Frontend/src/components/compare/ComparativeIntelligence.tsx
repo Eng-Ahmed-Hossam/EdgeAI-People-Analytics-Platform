@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { getAssets, runConceptAssessment, queryKeys } from "@/lib/api";
 import {
@@ -50,6 +51,21 @@ function coverageTone(score: number): string {
   return score >= 70 ? "text-status-high" :
          score >= 45 ? "text-status-med"  :
                        "text-status-low";
+}
+
+function confidenceLabel(assessment: ConceptAssessment): "High" | "Medium" | "Low" {
+  const width =
+    assessment.feasibility.confidenceInterval.high -
+    assessment.feasibility.confidenceInterval.low;
+  if (width <= 14 && assessment.temporal.coverageScore >= 70) return "High";
+  if (width <= 26 && assessment.temporal.coverageScore >= 45) return "Medium";
+  return "Low";
+}
+
+function impactLabel(assessment: ConceptAssessment): string {
+  if (assessment.feasibility.scoreBand === "strong") return "Best current opportunity";
+  if (assessment.feasibility.scoreBand === "moderate") return "Conditional opportunity";
+  return "High-risk option";
 }
 
 function availabilityLabel(asset: Asset): string {
@@ -289,14 +305,14 @@ function SetupView({
     <div className="mx-auto max-w-2xl px-5 py-10 lg:px-8">
       <div className="mb-8">
         <p className="font-body text-xs font-medium uppercase tracking-widest text-ink-faint">
-          Comparative intelligence
+          Decision briefing
         </p>
         <h1 className="mt-2 font-display text-3xl text-ink-strong">
-          Compare locations
+          Choose the strongest location
         </h1>
         <p className="mt-3 font-body text-sm text-ink-muted leading-6 max-w-lg">
           Choose a business concept and select {MIN_ASSETS}–{MAX_ASSETS} locations. The comparison
-          will evaluate every location against the same concept and rank them.
+          recommends the strongest option, explains confidence, and shows the tradeoffs.
         </p>
       </div>
 
@@ -331,7 +347,7 @@ function SetupView({
           </button>
           {canRun && (
             <p className="mt-2 font-body text-xs text-ink-faint text-center">
-              Uses standard operating parameters. Analysis takes ~3 seconds per location.
+              Uses standard operating parameters and ranks every location against the same concept.
             </p>
           )}
         </div>
@@ -414,6 +430,7 @@ function WinnerHero({
     : null;
   const strengths = winnerStrengths(winner.assessment);
   const warning = coverageWarning(ranked);
+  const confidence = confidenceLabel(winner.assessment);
 
   return (
     <section className="border-b border-hairline pb-7 mb-7">
@@ -421,15 +438,52 @@ function WinnerHero({
         Recommendation — {CONCEPT_LABELS[concept]}
       </p>
 
+      <div className="mb-6 rounded-(--r-lg) border border-accent/35 bg-accent-soft px-5 py-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="min-w-0">
+            <h1
+              className="font-display text-3xl font-semibold text-ink-strong leading-tight"
+              title={winner.asset.address}
+            >
+              Recommended: {winner.asset.address}
+            </h1>
+            <p className="mt-2 font-body text-sm leading-6 text-ink-muted">
+              {impactLabel(winner.assessment)} for {CONCEPT_LABELS[concept]}.
+              {scoreDelta !== null && scoreDelta > 0
+                ? ` Leads the next option by ${scoreDelta} points.`
+                : " Best option among the selected candidates."}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:min-w-72">
+            <div>
+              <p className="font-body text-[10px] uppercase tracking-widest text-ink-faint">
+                Confidence
+              </p>
+              <p className="mt-1 font-mono text-sm font-semibold text-ink-strong">
+                {confidence}
+              </p>
+            </div>
+            <div>
+              <p className="font-body text-[10px] uppercase tracking-widest text-ink-faint">
+        Next action
+              </p>
+              <p className="mt-1 font-body text-sm font-medium text-ink-body">
+                Validate winner
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
         {/* Left: winner identity + score */}
         <div>
-          <h1
+          <h2
             className="font-display text-3xl font-semibold text-ink-strong leading-tight mb-4"
             title={winner.asset.address}
           >
-            {winner.asset.address}
-          </h1>
+            Confidence and evidence
+          </h2>
 
           <div className="flex items-end gap-4 mb-4">
             <div className="flex items-baseline gap-1">
@@ -582,6 +636,22 @@ function WinnerHero({
             )}
           </div>
         </div>
+      </div>
+      <div className="mt-5 flex flex-wrap gap-2">
+        <Link
+          href="/report"
+          className="inline-flex h-9 items-center rounded-(--r-md) border border-accent bg-accent px-4 font-body text-sm font-semibold text-ink-strong hover:bg-accent-hover"
+        >
+          Generate decision memo
+        </Link>
+        <button
+          type="button"
+          disabled
+          title="Field workflow requires future operating contracts."
+          className="inline-flex h-9 items-center rounded-(--r-md) border border-hairline px-4 font-body text-sm text-ink-faint opacity-60"
+        >
+          Schedule field validation
+        </button>
       </div>
     </section>
   );
@@ -918,7 +988,7 @@ function ResultsView({
       <div className="flex items-start justify-between gap-4 mb-8">
         <div>
           <p className="font-body text-xs font-medium uppercase tracking-widest text-ink-faint">
-            Comparative intelligence
+          Decision briefing
           </p>
           <p className="mt-1 font-body text-sm text-ink-muted">
             {CONCEPT_LABELS[concept]} · {ranked.length} locations compared

@@ -34,6 +34,43 @@ const DEFAULT_PARAMS: Omit<BusinessParameters, "domain"> = {
   currency: "EGP",
 };
 
+function evidenceStrength(score: number): "High" | "Medium" | "Low" {
+  if (score >= 70) return "High";
+  if (score >= 45) return "Medium";
+  return "Low";
+}
+
+function assetRecommendation(score: number, hasTerms: boolean): string {
+  if (score >= 70) return "Assess this asset next";
+  if (score >= 45) return hasTerms ? "Assess, then compare" : "Assess with caution";
+  return "Use as a backup option";
+}
+
+function assetReason(score: number, hasTerms: boolean): string {
+  if (score >= 70 && hasTerms) {
+    return "The evidence base is strong and commercial terms are visible enough to support a serious first assessment.";
+  }
+  if (score >= 70) {
+    return "The evidence base is strong, but missing listed terms should be validated before negotiation.";
+  }
+  if (score >= 45) {
+    return "There is enough evidence to learn from this location, but the result should be checked against alternatives.";
+  }
+  return "The platform has limited evidence here, so any result will carry wider uncertainty.";
+}
+
+function resultRecommendation(band: string): string {
+  if (band === "strong") return "Advance to field validation";
+  if (band === "moderate") return "Compare before committing";
+  return "Prioritize another location";
+}
+
+function resultImpact(band: string): string {
+  if (band === "strong") return "Material opportunity";
+  if (band === "moderate") return "Conditional upside";
+  return "Limited upside";
+}
+
 // ── Panel props ───────────────────────────────────────────────────────────────
 
 export interface WorkspaceSidePanelProps {
@@ -237,15 +274,47 @@ function AssetIntelligencePanel({
                            "text-status-low";
   const presentCount = temporal?.sourceChecklist.filter((s) => s.present).length;
   const hasTerms = !!(asset.monthlyRent || asset.salePrice);
+  const strength = evidenceStrength(coverageScore);
 
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto">
-
-        {/* Listed commercial terms */}
         <div className="px-5 pt-5 pb-5 border-b border-hairline">
           <p className="font-body text-[10px] font-medium uppercase tracking-widest text-ink-faint mb-3">
-            Listed terms
+            Recommended next step
+          </p>
+          <div className="rounded-(--r-md) border border-accent/35 bg-accent-soft px-4 py-4">
+            <p className="font-display text-xl leading-tight text-ink-strong">
+              {assetRecommendation(coverageScore, hasTerms)}
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <div>
+                <p className="font-body text-[10px] uppercase tracking-widest text-ink-faint">
+                  Confidence
+                </p>
+                <p className={cn("mt-1 font-mono text-sm font-semibold", scoreTone)}>
+                  {strength}
+                </p>
+              </div>
+              <div>
+                <p className="font-body text-[10px] uppercase tracking-widest text-ink-faint">
+                  Business impact
+                </p>
+                <p className="mt-1 font-body text-sm font-medium text-ink-body">
+                  {hasTerms ? "Price can be tested" : "Terms need validation"}
+                </p>
+              </div>
+            </div>
+            <p className="mt-3 font-body text-xs leading-5 text-ink-muted">
+              {assetReason(coverageScore, hasTerms)}
+            </p>
+          </div>
+        </div>
+
+        {/* Listed commercial terms */}
+        <div className="px-5 pt-4 pb-5 border-b border-hairline">
+          <p className="font-body text-[10px] font-medium uppercase tracking-widest text-ink-faint mb-3">
+            Business impact
           </p>
 
           {!hasTerms ? (
@@ -287,7 +356,7 @@ function AssetIntelligencePanel({
         <div className="px-5 pt-4 pb-6">
           <div className="flex items-baseline justify-between mb-2">
             <p className="font-body text-[10px] font-medium uppercase tracking-widest text-ink-faint">
-              Data coverage
+              Supporting evidence
             </p>
             <div className="flex items-baseline gap-1">
               <span className={cn("font-mono text-base font-semibold tabular-nums leading-none", scoreTone)}>
@@ -414,8 +483,40 @@ function VerdictPanel({
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
     <div className="flex-1 overflow-y-auto">
-      {/* Score hero — the dominant number */}
-      <div className="px-5 pt-6 pb-5 border-b border-hairline">
+      <div className="px-5 pt-5 pb-5 border-b border-hairline">
+        <p className="font-body text-[10px] font-medium uppercase tracking-widest text-ink-faint mb-3">
+          Recommended next step
+        </p>
+        <div className={cn("rounded-(--r-md) border px-4 py-4", colors.bg, colors.border)}>
+          <p className="font-display text-xl leading-tight text-ink-strong">
+            {resultRecommendation(feasibility.scoreBand)}
+          </p>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <div>
+              <p className="font-body text-[10px] uppercase tracking-widest text-ink-faint">
+                Confidence
+              </p>
+              <p className="mt-1 font-mono text-sm font-semibold text-ink-body">
+                CI {feasibility.confidenceInterval.low}-{feasibility.confidenceInterval.high}
+              </p>
+            </div>
+            <div>
+              <p className="font-body text-[10px] uppercase tracking-widest text-ink-faint">
+                Business impact
+              </p>
+              <p className="mt-1 font-body text-sm font-medium text-ink-body">
+                {resultImpact(feasibility.scoreBand)}
+              </p>
+            </div>
+          </div>
+          <p className="mt-3 font-body text-xs leading-5 text-ink-muted">
+            {feasibility.narrative}
+          </p>
+        </div>
+      </div>
+
+      {/* Score is evidence, not the headline. */}
+      <div className="px-5 pt-5 pb-5 border-b border-hairline">
         <div className="flex items-start gap-4">
           <div className="shrink-0">
             <div className="flex items-baseline gap-1">
@@ -588,7 +689,7 @@ function VerdictPanel({
             <path d="M1 1h8a.5.5 0 01.5.5v10l-4.5-2.25L1 11.5V1.5A.5.5 0 011 1z" />
           </svg>
           <span className="font-body text-xs text-ink-muted">
-            Saved to portfolio
+            Saved assessment
           </span>
           {persistenceId && (
             <span className="ml-auto font-mono text-[10px] text-ink-faint/60 truncate max-w-24">
@@ -615,7 +716,7 @@ function VerdictPanel({
                 Saving…
               </span>
             ) : (
-              "Save to Portfolio"
+              "Save assessment"
             )}
           </Button>
           {saveError && (
@@ -625,7 +726,7 @@ function VerdictPanel({
           )}
           {!saveError && (
             <p className="mt-2 font-body text-xs text-ink-faint text-center">
-              Saves score, confidence, factors, and narrative to your portfolio.
+              Saves the recommendation, confidence, factors, and narrative.
             </p>
           )}
         </>
@@ -828,10 +929,10 @@ function ConceptForm({
             className="w-full"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Analysing…" : "Run Feasibility Assessment"}
+            {isSubmitting ? "Analysing…" : "Get recommendation"}
           </Button>
           <p className="mt-2.5 font-body text-xs text-ink-faint text-center">
-            Returns score, 95% confidence interval, and contributing factors.
+            Returns a recommendation, confidence interval, and supporting evidence.
           </p>
         </div>
       )}
@@ -1126,13 +1227,8 @@ export function WorkspaceSidePanel({
   return (
     <aside
       className={cn(
-        // Mobile: bottom sheet
-        "absolute inset-x-3 bottom-3 z-20 max-h-[74vh] overflow-hidden",
-        "rounded-(--r-lg) border border-hairline bg-surface shadow-(--shadow-pop)",
-        // Desktop: fixed right sidebar
-        "lg:static lg:inset-auto lg:flex lg:h-full lg:max-h-none",
-        "lg:w-105 lg:shrink-0 lg:flex-col",
-        "lg:rounded-none lg:border-y-0 lg:border-r-0 lg:border-l lg:shadow-none"
+        "flex h-full min-h-0 flex-col overflow-hidden bg-surface",
+        "border-b border-hairline lg:border-b-0 lg:border-l"
       )}
       aria-label="Assessment panel"
     >

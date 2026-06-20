@@ -121,40 +121,47 @@ export function ExecutiveReport({
           risk={risk}
         />
 
+        <BusinessImpactSection
+          feasibility={feasibility}
+          confidence={confidence}
+          risk={risk}
+        />
+
         <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_380px]">
           {/* Main column — feasibility evidence */}
           <div className="space-y-6">
-            <LocationIntelligence feasibility={feasibility} />
             <InsightSection
               emptyText="No dominant positive driver was isolated in this assessment."
               factors={positiveDrivers}
-              label="Key Positive Drivers"
+              label="Why this recommendation"
               tone="positive"
             />
             <InsightSection
               emptyText="No material risk driver was isolated in this assessment."
               factors={riskFactors}
-              label="Risks & Constraints"
+              label="Decision constraints"
               tone="risk"
             />
+            <LocationIntelligence feasibility={feasibility} />
           </div>
 
           {/* Sidebar — valuation, coverage, decision */}
           <div className="space-y-6">
-            <ReportSection title="Valuation Intelligence">
-              <ValuationFace assessment={assessment} />
-            </ReportSection>
-
-            <ReportSection title="Coverage Intelligence">
-              <CoverageFace temporal={assessment.temporal} />
-            </ReportSection>
-
             <DecisionSection
               feasibility={feasibility}
               confidence={confidence}
               risk={risk}
               neutralFactors={neutralFactors}
             />
+
+            <ReportSection title="Valuation Intelligence">
+              <ValuationFace assessment={assessment} />
+            </ReportSection>
+
+            <ReportSection title="Timing & Coverage">
+              <CoverageFace temporal={assessment.temporal} />
+            </ReportSection>
+
           </div>
         </div>
 
@@ -183,7 +190,7 @@ function ReportTopBar({
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
         <div className="min-w-0">
           <p className="font-body text-[10px] font-medium uppercase tracking-widest text-ink-faint">
-            Feasibility Report · {concept}
+            Executive Memo · {concept}
           </p>
           <p className="truncate font-display text-sm text-ink-strong">{siteName}</p>
         </div>
@@ -262,22 +269,22 @@ function ExecutiveSummary({
           {/* Four terse metrics */}
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <SummaryMetric
-              label="Feasibility Score"
+              label="Recommendation Score"
               value={`${f.feasibilityScore}`}
               sub={bandLabel(f.scoreBand)}
             />
             <SummaryMetric
-              label="Confidence Interval"
+              label="Confidence"
               value={`${f.confidenceInterval.low}–${f.confidenceInterval.high}`}
               sub="95% CI"
             />
             <SummaryMetric
               label="Success Likelihood"
               value={`${Math.round(f.successLikelihood * 100)}%`}
-              sub="Probability estimate"
+              sub="Business fit signal"
             />
             <SummaryMetric
-              label="Confidence"
+              label="Evidence Strength"
               value={confidence}
               sub={`${f.dataSources.length} source layers`}
             />
@@ -297,7 +304,7 @@ function ExecutiveSummary({
         <div className={cn("p-6 lg:p-8", colors.bg)}>
           <div className={cn("rounded-(--r-lg) border bg-page/35 p-5", colors.border)}>
             <p className="font-body text-xs font-medium uppercase tracking-widest text-ink-faint">
-              Decision Readiness
+              Next Action
             </p>
             <p className={cn("mt-4 font-display text-3xl", colors.text)}>
               {decisionReadiness(f.scoreBand)}
@@ -330,11 +337,46 @@ function ExecutiveSummary({
 
 // ── Location intelligence ─────────────────────────────────────────────────────
 
+function BusinessImpactSection({
+  feasibility,
+  confidence,
+  risk,
+}: {
+  feasibility: FeasibilityOutput;
+  confidence: string;
+  risk: string;
+}) {
+  return (
+    <section className="mt-6 rounded-(--r-lg) border border-hairline bg-surface p-5 shadow-(--shadow-card)">
+      <p className="font-body text-xs font-medium uppercase tracking-widest text-ink-faint">
+        Business Impact
+      </p>
+      <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,1fr)_280px]">
+        <div>
+          <h2 className="font-display text-2xl text-ink-strong">
+            {expectedUpside(feasibility.scoreBand)} upside with {risk.toLowerCase()} risk
+          </h2>
+          <p className="mt-3 font-body text-sm leading-6 text-ink-body">
+            {recommendedActionCopy(feasibility.scoreBand)}
+          </p>
+        </div>
+        <div className="grid gap-3">
+          <DecisionAttribute label="Confidence" value={confidence} />
+          <DecisionAttribute
+            label="Decision Readiness"
+            value={decisionReadiness(feasibility.scoreBand)}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LocationIntelligence({ feasibility }: { feasibility: FeasibilityOutput }) {
   const metrics = locationMetrics(feasibility);
 
   return (
-    <ReportSection title="Location Intelligence">
+    <ReportSection title="Feasibility Evidence">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {metrics.map((metric) => (
           <div
@@ -434,7 +476,7 @@ function DecisionSection({
   neutralFactors: ContributingFactor[];
 }) {
   return (
-    <ReportSection title="Decision Recommendation">
+    <ReportSection title="Recommended Action">
       <div className="rounded-(--r-lg) border border-hairline bg-sunken p-4">
         <p className="font-body text-xs font-medium uppercase tracking-widest text-ink-faint">
           Recommended Action
